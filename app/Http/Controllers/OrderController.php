@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateOrdersRequest;
+use App\Order;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -32,9 +34,19 @@ class OrderController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateOrdersRequest $request)
     {
-        //
+        Order::create([
+            'user_id' => auth()->user()->id,
+            'judul' => $request->judul,
+            'cust_name'=> $request->cust_name,
+            'cust_email'=> $request->cust_email,
+            'cust_phone'=> $request->cust_phone,
+            'start_date'=> $request->start_date,
+            'end_date'=> $request->end_date,
+        ]);
+        session()->flash('success','Order Create Successfully');
+        return redirect(route('home'));
     }
 
     /**

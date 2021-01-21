@@ -17,12 +17,12 @@ class CreateOrdersTable extends Migration
             $table->bigIncrements('id');
             $table->integer('user_id');
             $table->string('judul');
-            $table->integer('subtotal');
+            $table->integer('subtotal')->nullable();
             $table->string('cust_name');
             $table->string('cust_email');
-            $table->integer('cust_phone');
-            $table->date('start_date');
-            $table->date('end_date');
+            $table->string('cust_phone');
+            $table->string('start_date');
+            $table->string('end_date');
             $table->timestamps();
         });
     }
