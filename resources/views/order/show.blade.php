@@ -53,7 +53,7 @@
                                 </address>
                             </div>
                         </div>
-                        <table id="example1" class="table table-bordered table-striped">
+                        <table id="example2" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
                                     <th>Product</th>
@@ -75,8 +75,6 @@
                                 <?php $sum_tot += $od->price*$od->qty ?>
                                 @endif
                                 @endforeach
-                                <tr>
-                                </tr>
                             </tbody>
                             <tfoot>
                                 <tr>
@@ -127,15 +125,33 @@
 </div>
 @endsection
 @section('script')
+<script src="{{asset('plugins/datatables/jquery.dataTables.min.js')}}"></script>
+<script src="{{asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
+<script src="{{asset('plugins/datatables-responsive/js/dataTables.responsive.min.js')}}"></script>
+<script src="{{asset('plugins/datatables-responsive/js/responsive.bootstrap4.min.js')}}"></script>
 <script>
-    // var qtyvalue = $("#inputqty").val();
-    // var pricevalue = $("#inputprice").val();
     var totalvalue = $("#inputtotal");
     $(".calc").keyup(function () {
         var qtyvalue = parseFloat($("#inputqty").val());
         var pricevalue = parseFloat($("#inputprice").val());
         totalvalue.val(pricevalue * qtyvalue);
     });
-
+</script>
+<script>
+    $(function () {
+        $("#example1").DataTable({
+            "responsive": true,
+            "autoWidth": false,
+        });
+        $('#example2').DataTable({
+            "paging": true,
+            "lengthChange": false,
+            "searching": false,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true,
+        });
+    });
 </script>
 @endsection
