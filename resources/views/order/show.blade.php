@@ -68,7 +68,7 @@
                                 @if ($od->order_id == $order->id)
                                 <tr>
                                     <td>{{$od->product_name}}</td>
-                                    <td>{{$od->qty}}</td>
+                                    <td>{{$od->qty}} pcs</td>
                                     <td>Rp. {{number_format($od->price,2)}}</td>
                                     <td>Rp. {{number_format($od->qty * $od->price,2)}}</td>
                                 </tr>
@@ -136,6 +136,5 @@
         var pricevalue = parseFloat($("#inputprice").val());
         totalvalue.val(pricevalue * qtyvalue);
     });
-
 </script>
 @endsection
