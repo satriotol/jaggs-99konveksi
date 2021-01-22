@@ -2,14 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CreateOrdersRequest;
-use App\Order;
-use App\OrderDetail;
-use App\Payment;
+use App\Http\Requests\CreatePaymentRequest;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use App\Payment;
 
-class OrderController extends Controller
+class PaymentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,7 +15,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        return view('order.index')->with('orders', Order::all());
+        //
     }
 
     /**
@@ -28,7 +25,7 @@ class OrderController extends Controller
      */
     public function create()
     {
-        return view('order.create');
+        //
     }
 
     /**
@@ -37,19 +34,14 @@ class OrderController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CreateOrdersRequest $request)
+    public function store(CreatePaymentRequest $request)
     {
-        Order::create([
-            'user_id' => auth()->user()->id,
-            'judul' => $request->judul,
-            'cust_name'=> $request->cust_name,
-            'cust_email'=> $request->cust_email,
-            'cust_phone'=> $request->cust_phone,
-            'start_date'=> $request->start_date,
-            'end_date'=> $request->end_date,
+        Payment::create([
+            'order_id' => $request->order_id,
+            'pay' => $request->pay
         ]);
         session()->flash('success','Order Create Successfully');
-        return redirect(route('home'));
+        return redirect()->back();
     }
 
     /**
@@ -58,9 +50,9 @@ class OrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Order $order)
+    public function show($id)
     {
-        return view('order.show')->with('order',$order)->with('orderdetails', OrderDetail::all())->with('payments', Payment::all());
+        //
     }
 
     /**

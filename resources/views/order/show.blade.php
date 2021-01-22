@@ -53,36 +53,80 @@
                                 </address>
                             </div>
                         </div>
-                        <table id="example2" class="table table-bordered table-striped">
-                            <thead>
-                                <tr>
-                                    <th>Product</th>
-                                    <th>Quantity</th>
-                                    <th>Price</th>
-                                    <th>Total</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php $sum_tot = 0?>
-                                @foreach ($orderdetails as $od)
-                                @if ($od->order_id == $order->id)
-                                <tr>
-                                    <td>{{$od->product_name}}</td>
-                                    <td>{{$od->qty}} pcs</td>
-                                    <td>Rp. {{number_format($od->price,2)}}</td>
-                                    <td>Rp. {{number_format($od->qty * $od->price,2)}}</td>
-                                </tr>
-                                <?php $sum_tot += $od->price*$od->qty ?>
-                                @endif
-                                @endforeach
-                            </tbody>
-                            <tfoot>
-                                <tr>
-                                    <th class="text-center" colspan="3">Subtotal</th>
-                                    <td>Rp. {{number_format($sum_tot,2)}}</td>
-                                </tr>
-                            </tfoot>
-                        </table>
+                        <div class="row">
+                            <div class="col-12">
+                                <table id="example3" class="table table-bordered table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Product</th>
+                                            <th>Quantity</th>
+                                            <th>Price</th>
+                                            <th>Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php $sum_tot = 0?>
+                                        @foreach ($orderdetails as $od)
+                                        @if ($od->order_id == $order->id)
+                                        <tr>
+                                            <td>{{$od->product_name}}</td>
+                                            <td>{{$od->qty}} pcs</td>
+                                            <td>Rp. {{number_format($od->price,2)}}</td>
+                                            <td>Rp. {{number_format($od->qty * $od->price,2)}}</td>
+                                        </tr>
+                                        <?php $sum_tot += $od->price*$od->qty ?>
+                                        @endif
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <!-- accepted payments column -->
+                            <div class="col-md-6">
+
+                            </div>
+                            <!-- /.col -->
+                            <div class="col-md-6 col-sm-12">
+                                <p class="lead">Amount Due 2/22/2014</p>
+
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <th style="width:50%">Subtotal:</th>
+                                                <td>Rp. {{number_format($sum_tot,2)}}</td>
+                                            </tr>
+                                            <?php $sum_kekurangan = 0?>
+                                            @foreach ($payments as $payment)
+                                            @if ($payment->order_id == $order->id)
+                                            <tr>
+                                                <th>Payment <br><small><i>{{$payment->created_at}}</i></small></th>
+                                                <td>Rp. {{number_format($payment->pay,2)}}</td>
+                                            </tr>
+                                            <?php $sum_kekurangan += $payment->pay?>
+                                            @endif
+                                            @endforeach
+                                            <tr>
+                                                <th>Not Yet Paid</th>
+                                                <td>Rp. {{number_format($sum_tot-$sum_kekurangan,2)}}</td>
+                                            </tr>
+                                            @if ($sum_tot-$sum_kekurangan > 1)
+                                            <tr>
+                                                <td colspan="2">
+                                                    <button type="button" class="btn btn-block btn-success"
+                                                        data-toggle="modal" data-target="#modal-default">
+                                                        Make Payment
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            @endif
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <!-- /.col -->
+                        </div>
                     </div>
                 </div>
                 <div class="card card-primary">
@@ -123,6 +167,36 @@
         </div>
     </section>
 </div>
+<div class="modal fade" id="modal-default">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Add Payment</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="{{route('payments.store')}}" method="post">
+                    @csrf
+                    <input type="hidden" id="inputName" name="order_id" value="{{$order->id}}" class="form-control">
+                    <div class="form-group">
+                        <label for="inputName">Pay</label>
+                        <input type="text" id="inputName" name="pay" class="form-control">
+                    </div>
+            </div>
+            <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Save changes</button>
+                </form>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
 @endsection
 @section('script')
 <script src="{{asset('plugins/datatables/jquery.dataTables.min.js')}}"></script>
@@ -136,6 +210,7 @@
         var pricevalue = parseFloat($("#inputprice").val());
         totalvalue.val(pricevalue * qtyvalue);
     });
+
 </script>
 <script>
     $(function () {
@@ -152,6 +227,16 @@
             "autoWidth": false,
             "responsive": true,
         });
+        $('#example3').DataTable({
+            "paging": false,
+            "lengthChange": false,
+            "searching": false,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true,
+        });
     });
+
 </script>
 @endsection
