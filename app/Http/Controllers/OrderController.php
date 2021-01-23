@@ -53,6 +53,7 @@ class OrderController extends Controller
         return redirect(route('orders.show',$order->id));
     }
 
+
     /**
      * Display the specified resource.
      *
@@ -64,6 +65,11 @@ class OrderController extends Controller
         // $pdf = PDF::
         return view('order.show')->with('order',$order)->with('orderdetails', OrderDetail::all())->with('payments', Payment::all());
     }
+    // public function printpdf(Order $order)
+    // {
+    //     $pdf = PDF::loadview('order.show');
+    //     return view('order.show')->with('order',$order)->with('orderdetails', OrderDetail::all())->with('payments', Payment::all());
+    // }
 
     /**
      * Show the form for editing the specified resource.
