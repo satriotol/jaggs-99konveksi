@@ -88,8 +88,6 @@
                             </div>
                             <!-- /.col -->
                             <div class="col-md-6 col-sm-12">
-                                <p class="lead">Amount Due 2/22/2014</p>
-
                                 <div class="table-responsive">
                                     <table class="table">
                                         <tbody>
@@ -111,21 +109,26 @@
                                                 <th>Not Yet Paid</th>
                                                 <td>Rp. {{number_format($sum_tot-$sum_kekurangan,2)}}</td>
                                             </tr>
-                                            @if ($sum_tot-$sum_kekurangan > 1)
-                                            <tr>
-                                                <td colspan="2">
-                                                    <button type="button" class="btn btn-block btn-success"
-                                                        data-toggle="modal" data-target="#modal-default">
-                                                        Make Payment
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                            @endif
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
                             <!-- /.col -->
+                        </div>
+                        <div class="row no-print">
+                            <div class="col-12">
+                                <a href="invoice-print.html" target="_blank" class="btn btn-default"><i
+                                        class="fas fa-print"></i> Print</a>
+                                @if ($sum_tot-$sum_kekurangan > 1)
+                                <button type="button" class="btn btn-success float-right" data-toggle="modal"
+                                    data-target="#modal-default"><i class="far fa-credit-card"></i> Submit
+                                    Payment
+                                </button>
+                                @endif
+                                <button type="button" class="btn btn-primary float-right" style="margin-right: 5px;">
+                                    <i class="fas fa-download"></i> Generate PDF
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>

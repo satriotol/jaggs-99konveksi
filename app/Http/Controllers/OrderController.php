@@ -6,6 +6,7 @@ use App\Http\Requests\CreateOrdersRequest;
 use App\Order;
 use App\OrderDetail;
 use App\Payment;
+use Barryvdh\DomPDF\PDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -39,7 +40,7 @@ class OrderController extends Controller
      */
     public function store(CreateOrdersRequest $request)
     {
-        Order::create([
+        $order = Order::create([
             'user_id' => auth()->user()->id,
             'judul' => $request->judul,
             'cust_name'=> $request->cust_name,
@@ -49,7 +50,7 @@ class OrderController extends Controller
             'end_date'=> $request->end_date,
         ]);
         session()->flash('success','Order Create Successfully');
-        return redirect(route('home'));
+        return redirect(route('orders.show',$order->id));
     }
 
     /**
@@ -60,6 +61,7 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
+        // $pdf = PDF::
         return view('order.show')->with('order',$order)->with('orderdetails', OrderDetail::all())->with('payments', Payment::all());
     }
 
