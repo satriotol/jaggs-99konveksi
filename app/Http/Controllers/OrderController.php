@@ -6,7 +6,7 @@ use App\Http\Requests\CreateOrdersRequest;
 use App\Order;
 use App\OrderDetail;
 use App\Payment;
-use Barryvdh\DomPDF\PDF;
+use PDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -62,14 +62,14 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
-        // $pdf = PDF::
         return view('order.show')->with('order',$order)->with('orderdetails', OrderDetail::all())->with('payments', Payment::all());
     }
-    // public function printpdf(Order $order)
-    // {
-    //     $pdf = PDF::loadview('order.show');
-    //     return view('order.show')->with('order',$order)->with('orderdetails', OrderDetail::all())->with('payments', Payment::all());
-    // }
+    public function printpdf($id)
+    {
+        $order = Order::with('orderdetail')->find($id);
+        $pdf = PDF::loadview('pdf_test',compact('order'))->setPaper('a4', 'landscape');
+        return $pdf->stream();
+    }
 
     /**
      * Show the form for editing the specified resource.

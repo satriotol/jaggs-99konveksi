@@ -125,9 +125,9 @@
                                     Payment
                                 </button>
                                 @endif
-                                <button type="button" class="btn btn-primary float-right" style="margin-right: 5px;">
+                                <a href="{{route('print_pdf',$order->id)}}" class="btn btn-primary float-right" style="margin-right: 5px;">
                                     <i class="fas fa-download"></i> Generate PDF
-                                </button>
+                                </a>
                             </div>
                         </div>
                     </div>

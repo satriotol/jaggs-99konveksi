@@ -42,11 +42,6 @@
                                 <tbody>
                                     @foreach ($orders as $order)
                                     <tr>
-                                        {{-- <td>
-                                            @foreach ($order->orderdetail as $od)
-                                            {{$od->product_name}}
-                                            @endforeach
-                                        </td> --}}
                                         <td>{{$order->judul}}</td>
                                         <td><a href="{{route('orders.show',$order->id)}}" type="button"
                                                 class="btn btn-block btn-outline-info">Info</a></td>

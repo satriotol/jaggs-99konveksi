@@ -10,6 +10,6 @@ class OrderDetail extends Model
         'order_id','product_name','price','qty'
     ];
     public function order(){
-        return $this->belongsTo(OrderDetail::class);
+        return $this->belongsTo(Order::class);
     }
 }
