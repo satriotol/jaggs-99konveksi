@@ -21,6 +21,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('orderdetail', 'OrderDetailController');
     Route::resource('payments', 'PaymentController');
     Route::get('/cetak_pdf/{id}', 'OrderController@printpdf')->name('print_pdf');
+    Route::get('/email/{id}','OrderController@sendemail')->name('send_invoice');
 });
 
 

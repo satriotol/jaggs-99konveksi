@@ -139,13 +139,16 @@
                                     Payment
                                 </button>
                                 @endif
+                                <a href="{{route('send_invoice',$order->id)}}" class="btn btn-primary float-right" style="margin-right: 5px;">
+                                    <i class="fas fa-paper-plane"></i> Send Email
+                                </a>
                                 <a href="{{route('print_pdf',$order->id)}}" class="btn btn-primary float-right" style="margin-right: 5px;">
                                     <i class="fas fa-download"></i> Generate PDF
                                 </a>
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>\
                 <div class="card card-primary">
                     <div class="card-header">
                         <h3 class="card-title">Make Items</h3>

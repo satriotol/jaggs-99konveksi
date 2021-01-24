@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateOrdersRequest;
+use App\Mail\InvoiceMail;
 use App\Order;
 use App\OrderDetail;
 use App\Payment;
 use PDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class OrderController extends Controller
 {
@@ -106,5 +108,12 @@ class OrderController extends Controller
         $order->orderdetail()->delete();
         session()->flash('success','Order Deleted Successfully');
         return redirect(route('orders.index'));
+    }
+    public function sendemail($id)
+    {
+        $order = Order::with('orderdetail')->find($id);
+        $pdf = PDF::loadview('pdf_test',compact('order'))->setPaper('a4', 'landscape');
+        Mail::to($order->cust_email)->send(new InvoiceMail($order,$pdf));
+        return redirect()->back();
     }
 }
