@@ -32,6 +32,11 @@
                         </div>
                     </div>
                     <div class="card-body">
+                        @if (session()->has('success'))
+                        <div class="alert alert-success">
+                            {{session()->get('success')}}
+                        </div>
+                        @endif
                         <h4><i class="fas fa-globe"></i> {{$order->judul}}
                             <small class="float-right">{{$order->start_date}} - {{$order->end_date}}</small>
                         </h4>
@@ -216,6 +221,7 @@
 <script src="{{asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
 <script src="{{asset('plugins/datatables-responsive/js/dataTables.responsive.min.js')}}"></script>
 <script src="{{asset('plugins/datatables-responsive/js/responsive.bootstrap4.min.js')}}"></script>
+<script src="{{asset('plugins/toastr/toastr.min.js')}}"></script>
 <script>
     var totalvalue = $("#inputtotal");
     $(".calc").keyup(function () {

@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CreatePaymentRequest;
 use Illuminate\Http\Request;
-use App\Payment;
 
-class PaymentController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -34,14 +32,9 @@ class PaymentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CreatePaymentRequest $request)
+    public function store(Request $request)
     {
-        Payment::create([
-            'order_id' => $request->order_id,
-            'pay' => $request->pay
-        ]);
-        session()->flash('success','Payment Create Successfully');
-        return redirect()->back();
+        //
     }
 
     /**
@@ -84,10 +77,8 @@ class PaymentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Payment $payment)
+    public function destroy($id)
     {
-        $payment->delete();
-        session()->flash('success','Payment Deleted Successfully');
-        return redirect()->back();
+        //
     }
 }
