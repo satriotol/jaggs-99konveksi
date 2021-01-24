@@ -69,7 +69,12 @@
                                         @foreach ($orderdetails as $od)
                                         @if ($od->order_id == $order->id)
                                         <tr>
-                                            <td>{{$od->product_name}}</td>
+                                            <td>{{$od->product_name}} <br>
+                                            <form action="{{route('orderdetail.destroy',$od->id)}}" method="POST">
+                                            @method('DELETE')
+                                            @csrf
+                                            <small><input type="submit" style="color: red" value="delete"></small>
+                                            </form></td>
                                             <td>{{$od->qty}} pcs</td>
                                             <td>Rp. {{number_format($od->price,2)}}</td>
                                             <td>Rp. {{number_format($od->qty * $od->price,2)}}</td>
@@ -198,6 +203,7 @@
     </div>
     <!-- /.modal-dialog -->
 </div>
+
 <!-- /.modal -->
 
 @endsection

@@ -44,7 +44,9 @@
                                     <tr>
                                         <td>{{$order->judul}}</td>
                                         <td><a href="{{route('orders.show',$order->id)}}" type="button"
-                                                class="btn btn-block btn-outline-info">Info</a></td>
+                                                class="btn btn-outline-info">Info</a>
+                                            <button class="btn btn-outline-danger" id="deleteCategoryForm" onclick="handleDelete({{$order->id}})">Delete</button>
+                                        </td>
                                         <td>{{$order->cust_name}}</td>
                                         <td>{{$order->cust_phone}}</td>
                                         <td>{{$order->start_date}}</td>
@@ -76,6 +78,30 @@
     </section>
     <!-- /.content -->
 </div>
+<!-- Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <form action="{{route('orders.destroy',$order->id)}}" method="POST">
+            @csrf
+            @method('DELETE')
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Delete Category</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p class="text-center text-bold">Are you sure want to delete this category?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No, Go Back</button>
+                    <button type="submit" class="btn btn-danger">Yes, Delete</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
 @endsection
 @section('script')
 <script src="{{asset('plugins/datatables/jquery.dataTables.min.js')}}"></script>
@@ -98,6 +124,12 @@
             "responsive": true,
         });
     });
-
+</script>
+<script>
+    function handleDelete(id) {
+        var form = document.getElementById('deleteCategoryForm');
+        form.action = '/orders/' + id;
+        $('#deleteModal').modal('show');
+    }
 </script>
 @endsection

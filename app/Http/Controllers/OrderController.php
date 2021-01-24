@@ -68,7 +68,7 @@ class OrderController extends Controller
     {
         $order = Order::with('orderdetail')->find($id);
         $pdf = PDF::loadview('pdf_test',compact('order'))->setPaper('a4', 'landscape');
-        return $pdf->stream();
+        return $pdf->download("INV".$order->id."-99KONVKESI.pdf");
     }
 
     /**
@@ -100,8 +100,11 @@ class OrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Order $order)
     {
-        //
+        $order->delete();
+        $order->orderdetail()->delete();
+        session()->flash('success','Order Deleted Successfully');
+        return redirect(route('orders.index'));
     }
 }
