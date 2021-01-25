@@ -179,7 +179,7 @@
                 </div>
 
                 <!-- Sidebar Menu -->
-                <nav class="mt-2">
+                <nav class="mt-2 user-panel">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                         data-accordion="false">
                         <li class="nav-item">
@@ -218,24 +218,44 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="{{route('user.index')}}" class="nav-link {{ Request::routeIs('user.index') ? 'active' : '' }}">
+                                    <a href="{{route('user.index')}}"
+                                        class="nav-link {{ Request::routeIs('user.index') ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>User List</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{route('user.create')}}" class="nav-link {{ Request::routeIs('user.create') ? 'active' : '' }}">
+                                    <a href="{{route('user.create')}}"
+                                        class="nav-link {{ Request::routeIs('user.create') ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Add User</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{route('user.edit',Auth::user()->id)}}" class="nav-link {{ Request::routeIs('user.edit') ? 'active' : '' }}">
+                                    <a href="{{route('user.edit',Auth::user()->id)}}"
+                                        class="nav-link {{ Request::routeIs('user.edit') ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Edit User</p>
                                     </a>
                                 </li>
                             </ul>
+                        </li>
+                    </ul>
+                </nav>
+                <nav class="mt-2 user-panel">
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                        data-accordion="false">
+                        <li class="nav-item">
+                            <a href="{{ route('logout') }}" class="nav-link" onclick="event.preventDefault();
+                            document.getElementById('logout-form').submit();">
+                                <i class="nav-icon fas fa-door-open"></i>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    @csrf
+                                </form>
+                                <p>
+                                    Log Out
+                                </p>
+                            </a>
                         </li>
                     </ul>
                 </nav>
