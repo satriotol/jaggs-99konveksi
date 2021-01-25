@@ -50,29 +50,31 @@
                             @endif
                             <div class="form-group">
                                 <label for="name">Name</label>
-                                <input type="text" id="name" name="name" class="form-control" value="{{isset($user) ? $user->name : ''}}"
-                                    required autocomplete="name" autofocus>
+                                <input type="text" id="name" name="name" class="form-control"
+                                    value="{{isset($user) ? $user->name : ''}}" required autocomplete="name" autofocus>
                             </div>
                             <div class="form-group">
                                 <label for="phone_number">Phone Number</label>
                                 <input type="number" id="phone_number" name="phone_number" class="form-control"
-                                    value="{{isset($user)? $user->phone_number : ''}}" required autocomplete="phone_number" autofocus>
+                                    value="{{isset($user)? $user->phone_number : ''}}" required
+                                    autocomplete="phone_number" autofocus>
                             </div>
                             <div class="form-group">
                                 <label for="inputName">Email Address</label>
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
-                                    name="email" value="{{isset($user) ? $user->email:''}}" required autocomplete="email">
+                                    name="email" value="{{isset($user) ? $user->email:''}}" required
+                                    autocomplete="email">
                             </div>
                             <div class="form-group">
                                 <label for="inputName">Password</label>
                                 <input id="password" type="password"
                                     class="form-control @error('password') is-invalid @enderror" name="password"
-                                    required autocomplete="new-password">
+                                    autocomplete="new-password">
                             </div>
                             <div class="form-group">
                                 <label for="inputName">Confirm Password</label>
                                 <input id="password-confirm" type="password" class="form-control"
-                                    name="password_confirmation" required autocomplete="new-password">
+                                    name="password_confirmation" autocomplete="new-password">
                             </div>
                         </div>
                 </div>

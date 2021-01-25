@@ -147,6 +147,11 @@
                         <i class="fas fa-th-large"></i>
                     </a>
                 </li>
+                {{-- <li class="nav-item">
+                    <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
+                        <i class="fas fa-sign-out"></i>
+                    </a>
+                </li> --}}
             </ul>
         </nav>
         <!-- /.navbar -->
@@ -213,13 +218,19 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
+                                    <a href="{{route('user.index')}}" class="nav-link {{ Request::routeIs('user.index') ? 'active' : '' }}">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>User List</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
                                     <a href="{{route('user.create')}}" class="nav-link {{ Request::routeIs('user.create') ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Add User</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{route('user.edit',Auth::user()->id)}}" class="nav-link">
+                                    <a href="{{route('user.edit',Auth::user()->id)}}" class="nav-link {{ Request::routeIs('user.edit') ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Edit User</p>
                                     </a>

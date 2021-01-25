@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateUserRequest;
+use App\Http\Requests\UpdateUserRequest;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -16,7 +17,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        $users = User::all();
+        return view('user.index')->with('users',$users);
     }
 
     /**
@@ -45,7 +47,7 @@ class UserController extends Controller
             'password' => Hash::make($request['password']),
         ]);
         session()->flash('success','Order Create Successfully');
-        return redirect(route('home'));
+        return redirect(route('user.index'));
     }
 
     /**
@@ -78,9 +80,17 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateUserRequest $request, User $user)
     {
-        //
+        $user->update([
+            'name' => $request['name'],
+            'email' => $request['email'],
+            'phone_number' => $request['phone_number'],
+            'password' => Hash::make($request['password']),
+        ]);
+        session()->flash('success','Tag Update Successfully');
+
+        return redirect(route('home'));
     }
 
     /**
