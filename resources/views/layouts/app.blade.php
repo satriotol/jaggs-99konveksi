@@ -203,8 +203,8 @@
                                 </p>
                             </a>
                         </li>
-                        <li class="nav-item has-treeview">
-                            <a href="#" class="nav-link">
+                        <li class="nav-item has-treeview {{ (request()->segment(1)== 'user') ? 'menu-open' : '' }}">
+                            <a href="#" class="nav-link {{ (request()->segment(1)== 'user') ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-cog"></i>
                                 <p>
                                     User Setting
@@ -213,9 +213,15 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="../UI/general.html" class="nav-link">
+                                    <a href="{{route('user.create')}}" class="nav-link {{ Request::routeIs('user.create') ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Edit Profile</p>
+                                        <p>Add User</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{route('user.edit',Auth::user()->id)}}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Edit User</p>
                                     </a>
                                 </li>
                             </ul>
