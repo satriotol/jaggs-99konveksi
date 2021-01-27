@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateUserRequest;
+use App\Http\Requests\UpdateUserEmailRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\User;
 use Illuminate\Http\Request;
@@ -72,6 +73,10 @@ class UserController extends Controller
     {
         return view('user.create')->with('user',$user);
     }
+    public function editemail(User $user)
+    {
+        return view('user.updateemail')->with('user',$user);
+    }
 
     /**
      * Update the specified resource in storage.
@@ -90,6 +95,14 @@ class UserController extends Controller
         ]);
         session()->flash('success','Tag Update Successfully');
 
+        return redirect(route('home'));
+    }
+    public function updateemail(UpdateUserEmailRequest $request,User $user)
+    {
+        $user->update([
+            'email' => $request['email']
+        ]);
+        session()->flash('success','Tag Update Successfully');
         return redirect(route('home'));
     }
 

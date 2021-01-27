@@ -23,6 +23,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('user', 'UserController');
     Route::get('/cetak_pdf/{id}', 'OrderController@printpdf')->name('print_pdf');
     Route::get('/email/{id}','OrderController@sendemail')->name('send_invoice');
+    Route::put('/user/{user}/editemail','UserController@updateemail')->name('user.updateemail');
+    Route::get('/user/{user}/editemail','UserController@editemail')->name('user.editemail');
 });
 
 
