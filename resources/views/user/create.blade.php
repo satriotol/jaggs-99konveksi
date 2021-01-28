@@ -34,7 +34,7 @@
                     <form action="{{isset($user) ? route('user.update',$user->id): route('user.store')}}" method="post">
                         @csrf
                         @if (isset($user))
-                            @method('PUT')
+                        @method('PUT')
                         @endif
                         <div class="card-body">
                             @if ($errors->any())
@@ -65,13 +65,19 @@
                             <div class="form-group">
                                 <label for="inputName">Email Address</label>
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
-                                    name="email" value="{{isset($user) ? $user->email:''}}" required
-                                    autocomplete="email">
+                                    name="email" value="{{isset($user) ? $user->email:''}}" @if (isset($user)) readonly
+                                    @endif required autocomplete="email">
                                 {{-- <button type="button" data-toggle="modal" data-target="#modal-primary">test</button> --}}
                                 @isset($user)
-                                <a href="{{route('user.editemail',$user->id)}}">Edit User</a>
+                                <a href="{{route('user.editemail',$user->id)}}">Edit Email</a>
                                 @endisset
                             </div>
+                            @if (isset($user))
+                            <div class="form-group">
+                                <label for="Password"></label>
+                                <a href="">Change Password</a>
+                            </div>
+                            @else
                             <div class="form-group">
                                 <label for="inputName">Password</label>
                                 <input id="password" type="password"
@@ -83,6 +89,7 @@
                                 <input id="password-confirm" type="password" class="form-control"
                                     name="password_confirmation" autocomplete="new-password">
                             </div>
+                            @endif
                         </div>
                 </div>
             </div>

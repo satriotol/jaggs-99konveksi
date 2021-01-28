@@ -59,7 +59,7 @@
                                 <div class="input-group">
                                     <div class="input-group date" id="datetimepicker7" data-target-input="nearest">
                                         <input type="text" name="start_date" class="form-control datetimepicker-input"
-                                            data-target="#datetimepicker7" data-toggle="datetimepicker" />
+                                            data-target="#datetimepicker7" data-toggle="datetimepicker" autocomplete="off" />
                                         <div class="input-group-append" data-target="#datetimepicker7">
                                             <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                         </div>
@@ -71,7 +71,7 @@
                                 <div class="input-group">
                                     <div class="input-group date" id="datetimepicker8" data-target-input="nearest">
                                         <input type="text" name="end_date" class="form-control datetimepicker-input"
-                                            data-target="#datetimepicker8" data-toggle="datetimepicker" />
+                                            data-target="#datetimepicker8" data-toggle="datetimepicker" autocomplete="off"/>
                                         <div class="input-group-append" data-target="#datetimepicker8">
                                             <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                         </div>

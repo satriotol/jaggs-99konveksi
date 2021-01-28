@@ -217,6 +217,7 @@
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
+                                @if (auth()->user()->isAdmin())
                                 <li class="nav-item">
                                     <a href="{{route('user.index')}}"
                                         class="nav-link {{ Request::routeIs('user.index') ? 'active' : '' }}">
@@ -232,16 +233,17 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
+                                    <a href="{{route('user.admin')}}" class="nav-link {{ Request::routeIs('user.admin') ? 'active' : '' }}">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>User Role</p>
+                                    </a>
+                                </li>
+                                @endif
+                                <li class="nav-item">
                                     <a href="{{route('user.edit',Auth::user()->id)}}"
                                         class="nav-link {{ Request::routeIs('user.edit','user.editemail') ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Edit User</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{route('user.admin')}}" class="nav-link {{ Request::routeIs('user.admin') ? 'active' : '' }}">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>User Role</p>
                                     </a>
                                 </li>
                             </ul>
