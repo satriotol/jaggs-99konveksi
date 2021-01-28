@@ -31,53 +31,20 @@
                             <table id="example1" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
-                                        <th>Title</th>
+                                        <th>Name</th>
+                                        <th>Role</th>
                                         <th>Action</th>
-                                        <th>Customer Name</th>
-                                        <th>Customer Phone</th>
-                                        <th>Total Qty</th>
-                                        <th>Total Price</th>
-                                        <th>Start Date</th>
-                                        <th>End Date</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($orders as $order)
+                                    @foreach ($users as $user)
                                     <tr>
-                                        <td>{{$order->judul}}</td>
-                                        <td><a href="{{route('orders.show',$order->id)}}" type="button"
-                                                class="btn btn-outline-info">Info</a>
-                                                <button class="btn btn-outline-danger" id="deleteCategoryForm" onclick="handleDelete({{$order->id}})">Delete</button>
-                                            </td>
-                                        <td>{{$order->cust_name}}</td>
-                                        <td>{{$order->cust_phone}}</td>
-                                        <?php $sum_qty = 0?>
-                                        @foreach ($order->orderdetail as $od)
-                                        <?php $sum_qty += $od->qty ?>
-                                        @endforeach
-                                        <td>{{$sum_qty}}</td>
-                                        <?php $sum_price =0 ?>
-                                        @foreach ($order->orderdetail as $od)
-                                        <?php $sum_price += $od->price * $od->qty ?>
-                                        @endforeach
-                                        <td>Rp. {{number_format($sum_price,2)}}</td>
-                                        <td>{{$order->start_date}}</td>
-                                        <td>{{$order->end_date}}</td>
+                                        <td>{{$user->name}}</td>
+                                        <td>{{$user->role}}</td>
+                                        <td><button>Edit</button></td>
                                     </tr>
                                     @endforeach
                                 </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th>Title</th>
-                                        <th>Action</th>
-                                        <th>Customer Name</th>
-                                        <th>Customer Phone</th>
-                                        <th>Total Qty</th>
-                                        <th>Total Price</th>
-                                        <th>Start Date</th>
-                                        <th>End Date</th>
-                                    </tr>
-                                </tfoot>
                             </table>
                         </div>
                         <!-- /.card-body -->
@@ -92,8 +59,7 @@
     </section>
     <!-- /.content -->
 </div>
-<!-- Modal -->
-@if ($orders->count()>0)
+{{-- <!-- Modal -->
 <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <form action="{{route('orders.destroy',$order->id)}}" method="POST">
@@ -116,8 +82,7 @@
             </div>
         </form>
     </div>
-</div>
-@endif
+</div> --}}
 @endsection
 @section('script')
 <script src="{{asset('plugins/datatables/jquery.dataTables.min.js')}}"></script>
@@ -140,10 +105,6 @@
             "info": true,
             "ordering": true,
             "paging": true,
-            dom: 'Bfrtip',
-            buttons: [
-            'copy', 'csv', 'excel','print'
-            ],
         });
         $('#example2').DataTable({
             "paging": true,

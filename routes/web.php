@@ -26,6 +26,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::put('/user/{user}/editemail','UserController@updateemail')->name('user.updateemail');
     Route::get('/user/{user}/editemail','UserController@editemail')->name('user.editemail');
 });
+Route::group(['middleware' => ['admin']], function () {
+    Route::get('/role','UserController@createadmin')->name('user.admin');
+});
 
 
 

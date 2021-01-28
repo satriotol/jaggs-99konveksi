@@ -54,8 +54,6 @@ class OrderController extends Controller
         session()->flash('success','Order Create Successfully');
         return redirect(route('orders.show',$order->id));
     }
-
-
     /**
      * Display the specified resource.
      *

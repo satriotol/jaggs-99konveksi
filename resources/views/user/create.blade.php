@@ -31,8 +31,11 @@
                                 <i class="fas fa-minus"></i></button>
                         </div>
                     </div>
-                    <form action="{{route('user.store')}}" method="post">
+                    <form action="{{isset($user) ? route('user.update',$user->id): route('user.store')}}" method="post">
                         @csrf
+                        @if (isset($user))
+                            @method('PUT')
+                        @endif
                         <div class="card-body">
                             @if ($errors->any())
                             <div class="card card-danger">
@@ -66,7 +69,7 @@
                                     autocomplete="email">
                                 {{-- <button type="button" data-toggle="modal" data-target="#modal-primary">test</button> --}}
                                 @isset($user)
-                                <a href="{{route('user.editemail',$user->id)}}">test</a>
+                                <a href="{{route('user.editemail',$user->id)}}">Edit User</a>
                                 @endisset
                             </div>
                             <div class="form-group">

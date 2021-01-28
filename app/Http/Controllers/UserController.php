@@ -32,6 +32,12 @@ class UserController extends Controller
         return view('user.create');
     }
 
+    public function createadmin()
+    {
+        $users = User::all();
+        return view('user.createadmin')->with('users',$users);
+    }
+
     /**
      * Store a newly created resource in storage.
      *

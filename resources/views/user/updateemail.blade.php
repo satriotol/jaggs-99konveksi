@@ -51,9 +51,6 @@
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
                                     name="email" value="{{isset($user) ? $user->email:''}}" required
                                     autocomplete="email">
-                                @isset($user)
-                                <a href="{{route('user.editemail',$user->id)}}">test</a>
-                                @endisset
                             </div>
                         </div>
                 </div>
