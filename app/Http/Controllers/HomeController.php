@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Order;
+use App\User;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -25,6 +26,7 @@ class HomeController extends Controller
     public function index()
     {
         $orders = Order::all()->count();
-        return view('home')->with('orders',$orders);
+        $users = User::all()->count();
+        return view('home')->with('orders',$orders)->with('users',$users);
     }
 }
