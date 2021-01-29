@@ -41,7 +41,7 @@
                                     <tr>
                                         <td>{{$user->name}}</td>
                                         <td>{{$user->role}}</td>
-                                        <td><button>Edit</button></td>
+                                        <td><a href="{{route('user.editadmin',$user->id)}}" class="btn btn-primary">Edit</a></td>
                                     </tr>
                                     @endforeach
                                 </tbody>

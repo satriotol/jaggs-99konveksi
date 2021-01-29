@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateUserRequest;
+use App\Http\Requests\UpdateUserAdminRequest;
 use App\Http\Requests\UpdateUserEmailRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\User;
@@ -36,6 +37,18 @@ class UserController extends Controller
     {
         $users = User::all();
         return view('user.createadmin')->with('users',$users);
+    }
+    public function editadmin(User $user)
+    {
+        return view('user.editadmin')->with('user',$user);
+    }
+    public function updateadmin(UpdateUserAdminRequest $request,User $user)
+    {
+        $user->update([
+            'role' => $request['role']
+        ]);
+        session()->flash('success','User Role Update Successfully');
+        return redirect(route('home'));
     }
 
     /**
