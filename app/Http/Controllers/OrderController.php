@@ -112,6 +112,7 @@ class OrderController extends Controller
         $order = Order::with('orderdetail')->find($id);
         $pdf = PDF::loadview('pdf_test',compact('order'))->setPaper('a4', 'landscape');
         Mail::to($order->cust_email)->send(new InvoiceMail($order,$pdf));
+        session()->flash('success','Send Email Successfully');
         return redirect()->back();
     }
 }

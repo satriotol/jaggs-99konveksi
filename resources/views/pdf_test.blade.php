@@ -1,8 +1,3 @@
-{{-- {{$order->id}}
-{{$order->judul}}
-@foreach ($order->orderdetail as $od)
-{{$od->qty}}
-@endforeach --}}
 <!DOCTYPE html>
 <html lang="en">
 <head>
