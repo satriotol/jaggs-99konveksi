@@ -1,122 +1,174 @@
-{{-- {{$order->id}}
-{{$order->judul}}
-@foreach ($order->orderdetail as $od)
-{{$od->qty}}
-@endforeach --}}
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Invoice</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Hello, world!</title>
     <style>
-        body{
-            font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-            color:#333;
-            text-align:left;
-            font-size:18px;
-            margin:0;
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
         }
-        .container{
-            margin:0 auto;
-            /* margin-top:10px; */
-            padding:40px;
-            width:750px;
-            height:auto;
-            background-color:#fff;
+
+        @media print {
+            body {
+                width: 21cm;
+                height: 29.7cm;
+            }
         }
-        caption{
-            font-size:28px;
-            margin-bottom:15px;
+
+        .left-asset {
+            position: absolute;
+            left: 35px;
         }
-        table{
-            border:1px solid #333;
-            border-collapse:collapse;
-            margin:0 auto;
-            width:740px;
+
+        .left-asset .img-logo {
+            position: absolute;
+            top: 26px;
+            width: 169px;
+            height: auto;
         }
-        td, tr, th{
-            padding:12px;
-            border:1px solid #333;
-            width:185px;
+
+        .left-asset .title {
+            position: relative;
+            top: 200px;
+            font-size: 20px;
+            line-height: 23px;
+            font-weight: bold;
         }
-        th{
-            background-color: #f0f0f0;
+
+        .date-in {
+            left: 35px;
+            position: absolute;
+            top: 250px;
+            font-style: normal;
+            font-weight: bold;
+            font-size: 12px;
+            line-height: 30px;
+            color: #76AF30;
         }
-        h4, p{
-            margin:0px;
+
+        .date-out {
+            left: 150px;
+            position: absolute;
+            top: 250px;
+            font-style: normal;
+            font-weight: bold;
+            font-size: 12px;
+            line-height: 30px;
+            color: #76AF30;
         }
+
+        p {
+            font-size: 12px;
+            line-height: 14px;
+        }
+
+        p.contact-info {
+            position: absolute;
+            width: 169px;
+            left: 500px;
+            top: 35px;
+        }
+
+        p.title-order {
+            position: absolute;
+            width: 169px;
+            left: 500px;
+            top: 144px;
+            font-weight: bold;
+            font-size: 15px;
+            line-height: 14px;
+        }
+
+        .color-dg {
+            color: #026930;
+        }
+
+        table,
+        td {
+            border-bottom: 3px solid #76AF30;
+            border-collapse: collapse;
+        }
+
+        th {
+            border-top: 3px solid #76AF30;
+            color: #76AF30;
+        }
+
+        th,
+        td {
+            padding: 5px;
+            text-align: center;
+        }
+        .none-border{
+            border: 0px;
+        }
+
     </style>
 </head>
+
 <body>
-    <div class="container">
-        <table>
-            <caption>
-                Ninetynine Invoice
-            </caption>
-            <thead>
-                <tr>
-                    <th colspan="2">Invoice <strong>#{{ $order->id }}</strong></th>
-                    <th colspan="2">{{$order->start_date}} - {{$order->end_date}}</th>
-                </tr>
-                <tr>
-                    <td colspan="2">
-                        <h4>Perusahaan: </h4>
-                        <p>Ninetynine Konveksi<br>
-                            Jl Pete Selatan Nomor 18 Semarang<br>
-                            {{$order->user->phone_number}}<br>
-                            ninetyninekonveksi@gmail.com
-                        </p>
-                    </td>
-                    <td colspan="2">
-                        <h4>Pelanggan: </h4>
-                        <p>{{$order->judul}}/{{ $order->cust_name }}<br>
-                        {{ $order->cust_email }}<br>
-                        {{ $order->cust_phone }} <br>
-                        {{-- {{ $invoice->customer->email }} --}}
-                        </p>
-                    </td>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <th>Produk</th>
-                    <th>Harga</th>
-                    <th>Qty</th>
-                    <th>Subtotal</th>
-                </tr>
-                <?php $sum_tot = 0?>
-                @foreach ($order->orderdetail as $od)
-                <tr>
-                    <td>{{ $od->product_name }}</td>
-                    <td>Rp {{ number_format($od->price,2) }}</td>
-                    <td>{{ $od->qty }}</td>
-                    <td>Rp {{ number_format($od->price*$od->qty,2) }}</td>
-                </tr>
-                <?php $sum_tot += $od->price*$od->qty ?>
-                @endforeach
-                <tr>
-                    <th colspan="3">Subtotal</th>
-                    <td>Rp {{ number_format($sum_tot,2) }}</td>
-                </tr>
-                <?php $sum_kekurangan = 0?>
-                @foreach ($order->payment as $pay)
-                <tr>
-                    <th colspan="3">Payment <br><small><i>{{$pay->created_at}}</i></small></th>
-                    <td>Rp {{ number_format($pay->pay,2) }}</td>
-                </tr>
-                <?php $sum_kekurangan += $pay->pay?>
-                @endforeach
-            </tbody>
-            <tfoot>
-                <tr>
-                    <th colspan="3">Not Yet Paid</th>
-                    <td>Rp {{ number_format($sum_tot-$sum_kekurangan,2) }}</td>
-                </tr>
-            </tfoot>
+    <div class="left-asset">
+        <img class="img-logo"
+            src="{{asset('99logo.png')}}"
+            alt="">
+        <p class="title color-dg">
+            Faktur INV/{{ $order->id }}
+        </p>
+        <table style="width: 600px;top: 325px;position: absolute;">
+            <tr>
+                <th>Produk</th>
+                <th>Harga</th>
+                <th>Quantitas</th>
+                <th>Subtotal</th>
+            </tr>
+            <?php $sum_tot = 0?>
+            @foreach ($order->orderdetail as $od)
+            <tr>
+                <td>{{ $od->product_name }}</td>
+                <td>Rp {{ number_format($od->price,2) }}</td>
+                <td>{{ $od->qty }}</td>
+                <td>Rp {{ number_format($od->price*$od->qty,2) }}</td>
+            </tr>
+            <?php $sum_tot += $od->price*$od->qty ?>
+            @endforeach
+            <tr>
+                <th class="none-border" colspan="2"></th>
+                <th style="text-align: left;" colspan="1">Subtotal</th>
+                <td>Rp {{ number_format($sum_tot,2) }}</td>
+            </tr>
+            <?php $sum_kekurangan = 0?>
+            @foreach ($order->payment as $pay)
+            <tr>
+                <th class="none-border" colspan="2"></th>
+                <th colspan="1" style="color: black;text-align: left;">Dibayar pada</th>
+                <td>Rp {{ number_format($pay->pay,2) }}</td>
+            </tr>
+            <?php $sum_kekurangan += $pay->pay?>
+            @endforeach
+            <tr>
+                <td class="none-border" colspan="2"></td>
+                <th style="text-align: left;" colspan="1">Belum dibayarkan</th>
+                <td>Rp {{ number_format($sum_tot-$sum_kekurangan,2) }}</td>
+            </tr>
         </table>
     </div>
+    <p class="contact-info"><b>NINENTYNINE KONVEKSI</b><br>
+        Telp. {{$order->user->phone_number}} <br>
+        Email ninetyninekonveksi@gmail.com
+    </p>
+    <p class="title-order">{{$order->judul}}/{{$order->cust_name}}</p>
+    <div class="date-in">
+        <p>Tanggal Faktur</p>
+        <p style="color: black;">{{$order->start_date}}</p>
+    </div>
+    <div class="date-out">
+        <p>Jatuh Tempo</p>
+        <p style="color: black;">{{$order->end_date}}</p>
+    </div>
 </body>
+
 </html>

@@ -67,7 +67,7 @@ class OrderController extends Controller
     public function printpdf($id)
     {
         $order = Order::with('orderdetail')->find($id);
-        $pdf = PDF::loadview('pdf_test',compact('order'))->setPaper('a4', 'landscape');
+        $pdf = PDF::loadview('pdf_test',compact('order'));
         return $pdf->download("INV".$order->id."-99KONVKESI.pdf");
     }
 
