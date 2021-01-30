@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 <!doctype html>
-=======
-<!DOCTYPE html>
->>>>>>> c7d6957c1eb1eae840d31cd9c80ba791995e5c68
 <html lang="en">
 
 <head>
@@ -117,7 +113,7 @@
 <body>
     <div class="left-asset">
         <img class="img-logo"
-            src="{{asset('99logo.png')}}"
+            src="https://ninetyninekonveksi.jagsstore.com/99logo-min.png"
             alt="">
         <p class="title color-dg">
             Faktur INV/{{ $order->id }}

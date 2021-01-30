@@ -68,7 +68,7 @@ class OrderController extends Controller
     {
         $order = Order::with('orderdetail')->find($id);
         $pdf = PDF::loadview('pdf_test',compact('order'));
-        return $pdf->download("INV".$order->id."-99KONVKESI.pdf");
+        return $pdf->download("INV-".$order->id.".pdf");
     }
 
     /**
@@ -110,7 +110,7 @@ class OrderController extends Controller
     public function sendemail($id)
     {
         $order = Order::with('orderdetail')->find($id);
-        $pdf = PDF::loadview('pdf_test',compact('order'))->setPaper('a4', 'landscape');
+        $pdf = PDF::loadview('pdf_test',compact('order'))->setPaper('a4');
         Mail::to($order->cust_email)->send(new InvoiceMail($order,$pdf));
         session()->flash('success','Send Email Successfully');
         return redirect()->back();
