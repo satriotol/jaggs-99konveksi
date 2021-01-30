@@ -72,7 +72,7 @@ return [
                 'description' => 'Shortcut Link 2 Description',
                 'url' => '/shortcutlink2'
             ]
-        ],
-        'custom' => []
+        ]
+        // 'custom' => []
     ]
 ];
