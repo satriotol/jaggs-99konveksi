@@ -103,7 +103,8 @@
             padding: 5px;
             text-align: center;
         }
-        .none-border{
+
+        .none-border {
             border: 0px;
         }
 
@@ -112,9 +113,7 @@
 
 <body>
     <div class="left-asset">
-        <img class="img-logo"
-            src="https://ninetyninekonveksi.jagsstore.com/99logo-min.png"
-            alt="">
+        <img class="img-logo" src="https://ninetyninekonveksi.jagsstore.com/99logo-min.png" alt="">
         <p class="title color-dg">
             Faktur INV/{{ $order->id }}
         </p>
@@ -152,11 +151,18 @@
             <tr>
                 <td class="none-border" colspan="2"></td>
                 <th style="text-align: left;" colspan="1">Belum dibayarkan</th>
+                @if ($sum_tot-$sum_kekurangan == "0")
+                <td style="color: #28a745">
+                    <h3><b>LUNAS</b></h3>
+                </td>
+                @else
                 <td>Rp {{ number_format($sum_tot-$sum_kekurangan,2) }}</td>
+                @endif
             </tr>
         </table>
     </div>
     <p class="contact-info"><b>NINENTYNINE KONVEKSI</b><br>
+        {{$order->user->name}} <br>
         Telp. {{$order->user->phone_number}} <br>
         Email ninetyninekonveksi@gmail.com
     </p>

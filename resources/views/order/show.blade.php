@@ -44,9 +44,9 @@
                             <div class="col-sm-6">
                                 From
                                 <address>
-                                    <strong>{{ Auth::user()->name }}</strong><br>
-                                    {{Auth::user()->phone_number}}<br>
-                                    {{Auth::user()->email}}
+                                    <strong>{{ $order->user->name }}</strong><br>
+                                    {{$order->user->phone_number}}<br>
+                                    {{$order->user->email}}
                                 </address>
                             </div>
                             <div class="col-sm-6">
@@ -75,11 +75,13 @@
                                         @if ($od->order_id == $order->id)
                                         <tr>
                                             <td>{{$od->product_name}} <br>
-                                            <form action="{{route('orderdetail.destroy',$od->id)}}" method="POST">
-                                            @method('DELETE')
-                                            @csrf
-                                            <small><input type="submit" style="color: red" value="delete"></small>
-                                            </form></td>
+                                                <form action="{{route('orderdetail.destroy',$od->id)}}" method="POST">
+                                                    @method('DELETE')
+                                                    @csrf
+                                                    <small><input type="submit" style="color: red"
+                                                            value="delete"></small>
+                                                </form>
+                                            </td>
                                             <td>{{$od->qty}} pcs</td>
                                             <td>Rp. {{number_format($od->price,2)}}</td>
                                             <td>Rp. {{number_format($od->qty * $od->price,2)}}</td>
@@ -110,11 +112,12 @@
                                             @if ($payment->order_id == $order->id)
                                             <tr>
                                                 <th>Payment <br><small><i>{{$payment->created_at}}</i></small><br>
-                                                <form action="{{route('payments.destroy',$payment->id)}}" method="post">
-                                                @method('DELETE')
-                                                @csrf
-                                                <input type="submit" class="btn btn-danger" value="delete">
-                                                </form>
+                                                    <form action="{{route('payments.destroy',$payment->id)}}"
+                                                        method="post">
+                                                        @method('DELETE')
+                                                        @csrf
+                                                        <input type="submit" class="btn btn-danger" value="delete">
+                                                    </form>
                                                 </th>
                                                 <td>Rp. {{number_format($payment->pay,2)}}</td>
                                             </tr>
@@ -123,7 +126,11 @@
                                             @endforeach
                                             <tr>
                                                 <th>Not Yet Paid</th>
-                                                <td>Rp. {{number_format($sum_tot-$sum_kekurangan,2)}}</td>
+                                                @if ($sum_tot-$sum_kekurangan == "0")
+                                                <td style="color: #28a745"><h3><b>LUNAS</b></h3></td>
+                                                @else
+                                                <td>Rp {{ number_format($sum_tot-$sum_kekurangan,2) }}</td>
+                                                @endif
                                             </tr>
                                         </tbody>
                                     </table>
@@ -139,10 +146,12 @@
                                     Payment
                                 </button>
                                 @endif
-                                <a href="{{route('send_invoice',$order->id)}}" class="btn btn-primary float-right" style="margin-right: 5px;">
+                                <a href="{{route('send_invoice',$order->id)}}" class="btn btn-primary float-right"
+                                    style="margin-right: 5px;">
                                     <i class="fas fa-paper-plane"></i> Send Email
                                 </a>
-                                <a href="{{route('print_pdf',$order->id)}}" class="btn btn-primary float-right" style="margin-right: 5px;">
+                                <a href="{{route('print_pdf',$order->id)}}" class="btn btn-primary float-right"
+                                    style="margin-right: 5px;">
                                     <i class="fas fa-download"></i> Generate PDF
                                 </a>
                             </div>
