@@ -111,7 +111,8 @@
                                             @foreach ($payments as $payment)
                                             @if ($payment->order_id == $order->id)
                                             <tr>
-                                                <th>Payment <br><small><i>{{$payment->date}}/{{$payment->description}}</i></small><br>
+                                                <th>Payment
+                                                    <br><small><i>{{$payment->date}}/{{$payment->description}}</i></small><br>
                                                     <form action="{{route('payments.destroy',$payment->id)}}"
                                                         method="post">
                                                         @method('DELETE')
@@ -127,7 +128,9 @@
                                             <tr>
                                                 <th>Not Yet Paid</th>
                                                 @if ($sum_tot-$sum_kekurangan == "0")
-                                                <td style="color: #28a745"><h3><b>LUNAS</b></h3></td>
+                                                <td style="color: #28a745">
+                                                    <h3><b>LUNAS</b></h3>
+                                                </td>
                                                 @else
                                                 <td>Rp {{ number_format($sum_tot-$sum_kekurangan,2) }}</td>
                                                 @endif
@@ -174,15 +177,18 @@
                                 class="form-control">
                             <div class="form-group">
                                 <label for="inputName">Product</label>
-                                <input type="text" id="inputName" autocomplete="off" name="product_name" class="form-control">
+                                <input type="text" id="inputName" autocomplete="off" name="product_name"
+                                    class="form-control">
                             </div>
                             <div class="form-group">
                                 <label for="inputName">Quantity</label>
-                                <input type="number" id="inputqty" autocomplete="off" name="qty" class="form-control calc">
+                                <input type="number" id="inputqty" autocomplete="off" name="qty"
+                                    class="form-control calc">
                             </div>
                             <div class="form-group">
                                 <label for="inputName">Price</label>
-                                <input type="number" id="inputprice" autocomplete="off" name="price" class="form-control calc">
+                                <input type="number" id="inputprice" autocomplete="off" name="price"
+                                    class="form-control calc">
                             </div>
                             <div class="form-group">
                                 <label for="inputName">Total Price</label>
@@ -210,7 +216,6 @@
                     @csrf
                     <input type="hidden" id="inputName" name="order_id" value="{{$order->id}}" class="form-control">
                     <input type="hidden" name="type" value="income">
-                    <input type="hidden" name="description" value="dp">
                     <div class="form-group">
                         <label for="inputName">Pay</label>
                         <input type="text" id="inputName" autocomplete="off" name="pay" class="form-control">
@@ -226,6 +231,15 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <select name="description" class="form-control">
+                            <option value="">Choose One</option>
+                            <option value="dp">DP</option>
+                            <option value="pelunasan">Pelunasan</option>
+                            <option value="lainnya">lainnya</option>
+                        </select>
                     </div>
             </div>
             <div class="modal-footer justify-content-between">
@@ -252,7 +266,7 @@
     $(function () {
         $('#datetimepicker7').datetimepicker({
             format: 'L',
-            format:'YYYY/MM/DD',
+            format: 'YYYY/MM/DD',
         });
         $("#datetimepicker7").on("change.datetimepicker", function (e) {
             $('#datetimepicker8').datetimepicker('minDate', e.date);
