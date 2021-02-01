@@ -38,7 +38,10 @@ class PaymentController extends Controller
     {
         Payment::create([
             'order_id' => $request->order_id,
-            'pay' => $request->pay
+            'pay' => $request->pay,
+            'type' => $request->type,
+            'date' => $request->date,
+            'description'=> $request->description
         ]);
         session()->flash('success','Payment Create Successfully');
         return redirect()->back();

@@ -111,7 +111,7 @@
                                             @foreach ($payments as $payment)
                                             @if ($payment->order_id == $order->id)
                                             <tr>
-                                                <th>Payment <br><small><i>{{$payment->created_at}}</i></small><br>
+                                                <th>Payment <br><small><i>{{$payment->date}}/{{$payment->description}}</i></small><br>
                                                     <form action="{{route('payments.destroy',$payment->id)}}"
                                                         method="post">
                                                         @method('DELETE')
@@ -174,15 +174,15 @@
                                 class="form-control">
                             <div class="form-group">
                                 <label for="inputName">Product</label>
-                                <input type="text" id="inputName" name="product_name" class="form-control">
+                                <input type="text" id="inputName" autocomplete="off" name="product_name" class="form-control">
                             </div>
                             <div class="form-group">
                                 <label for="inputName">Quantity</label>
-                                <input type="number" id="inputqty" name="qty" class="form-control calc">
+                                <input type="number" id="inputqty" autocomplete="off" name="qty" class="form-control calc">
                             </div>
                             <div class="form-group">
                                 <label for="inputName">Price</label>
-                                <input type="number" id="inputprice" name="price" class="form-control calc">
+                                <input type="number" id="inputprice" autocomplete="off" name="price" class="form-control calc">
                             </div>
                             <div class="form-group">
                                 <label for="inputName">Total Price</label>
@@ -209,9 +209,23 @@
                 <form action="{{route('payments.store')}}" method="post">
                     @csrf
                     <input type="hidden" id="inputName" name="order_id" value="{{$order->id}}" class="form-control">
+                    <input type="hidden" name="type" value="income">
+                    <input type="hidden" name="description" value="dp">
                     <div class="form-group">
                         <label for="inputName">Pay</label>
-                        <input type="text" id="inputName" name="pay" class="form-control">
+                        <input type="text" id="inputName" autocomplete="off" name="pay" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Date</label>
+                        <div class="input-group">
+                            <div class="input-group date" id="datetimepicker7" data-target-input="nearest">
+                                <input type="text" name="date" class="form-control datetimepicker-input"
+                                    data-target="#datetimepicker7" data-toggle="datetimepicker" autocomplete="off" />
+                                <div class="input-group-append" data-target="#datetimepicker7">
+                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
             </div>
             <div class="modal-footer justify-content-between">
@@ -234,6 +248,18 @@
 <script src="{{asset('plugins/datatables-responsive/js/dataTables.responsive.min.js')}}"></script>
 <script src="{{asset('plugins/datatables-responsive/js/responsive.bootstrap4.min.js')}}"></script>
 <script src="{{asset('plugins/toastr/toastr.min.js')}}"></script>
+<script type="text/javascript">
+    $(function () {
+        $('#datetimepicker7').datetimepicker({
+            format: 'L',
+            format:'YYYY/MM/DD',
+        });
+        $("#datetimepicker7").on("change.datetimepicker", function (e) {
+            $('#datetimepicker8').datetimepicker('minDate', e.date);
+        });
+    });
+
+</script>
 <script>
     var totalvalue = $("#inputtotal");
     $(".calc").keyup(function () {

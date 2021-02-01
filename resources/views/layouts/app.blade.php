@@ -84,6 +84,11 @@
     <link rel="stylesheet" href="{{asset('plugins/daterangepicker/daterangepicker.css')}}">
     <link rel="stylesheet" href="{{asset('plugins/summernote/summernote-bs4.css')}}">
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <style>
+        body{
+            zoom: 90%;
+        }
+    </style>
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">

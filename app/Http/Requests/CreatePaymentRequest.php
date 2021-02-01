@@ -25,7 +25,10 @@ class CreatePaymentRequest extends FormRequest
     {
         return [
             'order_id'=>'required',
-            'pay'=>'required|numeric'
+            'pay'=>'required|numeric',
+            'type'=>'required',
+            'description'=>'required',
+            'date'=>'required'
         ];
     }
 }
