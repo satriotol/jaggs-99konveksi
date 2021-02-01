@@ -6,7 +6,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>{{isset($user) ? 'Edit User' : 'Create User'}}</h1>
+                    <h1>{{isset($payment) ? 'Edit Payment' : 'Create Payment'}}</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -31,9 +31,9 @@
                                 <i class="fas fa-minus"></i></button>
                         </div>
                     </div>
-                    <form action="{{isset($user) ? route('user.update',$user->id): route('user.store')}}" method="post">
+                    <form action="{{isset($payment) ? route('payments.update',$payment->id): route('payment.store')}}" method="post">
                         @csrf
-                        @if (isset($user))
+                        @if (isset($payment))
                         @method('PUT')
                         @endif
                         <div class="card-body">
@@ -52,45 +52,30 @@
                             </div>
                             @endif
                             <div class="form-group">
-                                <label for="name">Name</label>
-                                <input type="text" id="name" name="name" class="form-control"
-                                    value="{{isset($user) ? $user->name : ''}}" required autocomplete="name" autofocus>
+                                <label for="name">Pay Amount</label>
+                                <input type="number" id="pay" name="pay" class="form-control"
+                                    value="{{isset($payment) ? $payment->pay : ''}}" required autocomplete="name" autofocus>
                             </div>
                             <div class="form-group">
-                                <label for="phone_number">Phone Number</label>
-                                <input type="number" id="phone_number" name="phone_number" class="form-control"
-                                    value="{{isset($user)? $user->phone_number : ''}}" required
-                                    autocomplete="phone_number" autofocus>
+                                <label for="phone_number">Edit Type</label>
+                                <select name="description" id="" class="form-control">
+                                    <option value="dp" {{$payment->description == 'dp' ? 'selected' : ''}}>DP</option>
+                                    <option value="pelunasan" {{$payment->description == 'pelunasan' ? 'selected' : ''}}>Pelunasan</option>
+                                    <option value="lain" {{$payment->description == 'lain' ? 'selected' : ''}}>Lainnya</option>
+                                </select>
                             </div>
                             <div class="form-group">
-                                <label for="inputName">Email Address</label>
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
-                                    name="email" value="{{isset($user) ? $user->email:''}}" @if (isset($user)) readonly
-                                    @endif required autocomplete="email">
-                                {{-- <button type="button" data-toggle="modal" data-target="#modal-primary">test</button> --}}
+                                <label>Date</label>
+                                <div class="input-group">
+                                    <div class="input-group date" id="datetimepicker7" data-target-input="nearest">
+                                        <input type="text" name="date" class="form-control datetimepicker-input"
+                                            data-target="#datetimepicker7" data-toggle="datetimepicker" autocomplete="off" value="{{isset($payment) ? $payment->date : ''}}" />
+                                        <div class="input-group-append" data-target="#datetimepicker7">
+                                            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            @if (isset($user))
-                            <div class="form-group">
-                                <label for="Password"></label>
-                                <a href="{{route('user.editemail',$user->id)}}">Edit Email</a>
-                            </div>
-                            <div class="form-group">
-                                <label for="Password"></label>
-                                <a href="">Change Password</a>
-                            </div>
-                            @else
-                            <div class="form-group">
-                                <label for="inputName">Password</label>
-                                <input id="password" type="password"
-                                    class="form-control @error('password') is-invalid @enderror" name="password"
-                                    autocomplete="new-password">
-                            </div>
-                            <div class="form-group">
-                                <label for="inputName">Confirm Password</label>
-                                <input id="password-confirm" type="password" class="form-control"
-                                    name="password_confirmation" autocomplete="new-password">
-                            </div>
-                            @endif
                         </div>
                 </div>
             </div>
@@ -98,7 +83,7 @@
         <div class="row">
             <div class="col-12">
                 <a href="#" class="btn btn-secondary">Cancel</a>
-                <input type="submit" value="Register" class="btn btn-success float-right">
+                <input type="submit" value="Submit" class="btn btn-success float-right">
             </div>
             </form>
         </div>
@@ -111,16 +96,10 @@
     $(function () {
         $('#datetimepicker7').datetimepicker({
             format: 'L',
-        });
-        $('#datetimepicker8').datetimepicker({
-            useCurrent: false,
-            format: 'L'
+            format: 'YYYY/MM/DD',
         });
         $("#datetimepicker7").on("change.datetimepicker", function (e) {
             $('#datetimepicker8').datetimepicker('minDate', e.date);
-        });
-        $("#datetimepicker8").on("change.datetimepicker", function (e) {
-            $('#datetimepicker7').datetimepicker('maxDate', e.date);
         });
     });
 

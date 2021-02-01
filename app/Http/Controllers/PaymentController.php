@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreatePaymentRequest;
+use App\Http\Requests\UpdateOrderPaymentRequest;
 use Illuminate\Http\Request;
 use App\Payment;
 
@@ -64,9 +65,9 @@ class PaymentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Payment $payment)
     {
-        //
+        return view('payment.create')->with('payment',$payment);
     }
 
     /**
@@ -76,9 +77,15 @@ class PaymentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateOrderPaymentRequest $request, Payment $payment)
     {
-        //
+        $payment->update([
+            'pay' => $request['pay'],
+            'description' => $request['description'],
+            'date' => $request['date']
+        ]);
+        session()->flash('success','Payment Update Successfully');
+        return redirect()->back();
     }
 
     /**

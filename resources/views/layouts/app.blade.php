@@ -271,11 +271,43 @@
                             </p>
                         </a>
                     </li>
-                    <li
-                        class="nav-item has-treeview {{ (request()->segment(1)== 'user') ? 'menu-open' : '' }} {{ Request::routeIs('user.admin') ? 'menu-open' : '' }}">
+                    <li class="nav-item has-treeview">
                         <a href="#"
-                            class="nav-link {{ (request()->segment(1)== 'user') ? 'active' : '' }} {{ Request::routeIs('user.admin') ? 'active' : '' }}">
-                            <i class="nav-icon fas fa-cog"></i>
+                            class="nav-link">
+                            <i class="nav-icon fas fa-money-bill"></i>
+                            <p>
+                                Cash Flow
+                                <i class="fas fa-angle-left right"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href=""
+                                    class="nav-link {{ Request::routeIs('user.index') ? 'active' : '' }}">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Overview</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href=""
+                                    class="nav-link {{ Request::routeIs('user.create') ? 'active' : '' }}">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Income</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href=""
+                                    class="nav-link {{ Request::routeIs('user.admin') ? 'active' : '' }}">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Outcome</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item has-treeview {{ (request()->segment(1)== 'user') ? 'menu-open' : '' }} {{ Request::routeIs('user.admin') ? 'menu-open' : '' }} {{ Request::routeIs('user.create') ? 'menu-open' : '' }}">
+                        <a href="#"
+                            class="nav-link {{ (request()->segment(1)== 'user') ? 'active' : '' }} {{ Request::routeIs('user.admin') ? 'active' : '' }} {{ Request::routeIs('user.create') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-user-cog"></i>
                             <p>
                                 User Setting
                                 <i class="fas fa-angle-left right"></i>

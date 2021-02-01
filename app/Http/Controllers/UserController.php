@@ -112,7 +112,7 @@ class UserController extends Controller
             'phone_number' => $request['phone_number'],
             'password' => Hash::make($request['password']),
         ]);
-        session()->flash('success','Tag Update Successfully');
+        session()->flash('success','User Update Successfully');
 
         return redirect(route('home'));
     }

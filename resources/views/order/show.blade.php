@@ -78,8 +78,7 @@
                                                 <form action="{{route('orderdetail.destroy',$od->id)}}" method="POST">
                                                     @method('DELETE')
                                                     @csrf
-                                                    <small><input type="submit" style="color: red"
-                                                            value="delete"></small>
+                                                    <small><input type="submit" style="color: red" value="delete"></small>
                                                 </form>
                                             </td>
                                             <td>{{$od->qty}} pcs</td>
@@ -118,6 +117,7 @@
                                                         @method('DELETE')
                                                         @csrf
                                                         <input type="submit" class="btn btn-danger" value="delete">
+                                                        <a class="btn btn-warning" href="{{route('payments.edit',$payment->id)}}">Edit</a>
                                                     </form>
                                                 </th>
                                                 <td>Rp. {{number_format($payment->pay,2)}}</td>
@@ -160,7 +160,7 @@
                             </div>
                         </div>
                     </div>
-                </div>\
+                </div>
                 <div class="card card-primary">
                     <div class="card-header">
                         <h3 class="card-title">Make Items</h3>
