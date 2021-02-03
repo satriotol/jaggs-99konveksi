@@ -90,7 +90,7 @@ class PaymentController extends Controller
             'date' => $request['date']
         ]);
         session()->flash('success','Payment Update Successfully');
-        return redirect()->back();
+        return redirect()->route('orders.show',$payment->order_id);
     }
 
     /**

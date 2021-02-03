@@ -31,7 +31,8 @@
                                 <i class="fas fa-minus"></i></button>
                         </div>
                     </div>
-                    <form action="{{isset($payment) ? route('payments.update',$payment->id): route('payment.store')}}" method="post">
+                    <form action="{{isset($payment) ? route('payments.update',$payment->id): route('payment.store')}}"
+                        method="post">
                         @csrf
                         @if (isset($payment))
                         @method('PUT')
@@ -51,18 +52,26 @@
                                 </div>
                             </div>
                             @endif
+                            @if (session()->has('success'))
+                            <div class="alert alert-success">
+                                {{session()->get('success')}}
+                            </div>
+                            @endif
                             <div class="form-group">
                                 <label for="name">Pay Amount</label>
                                 <input type="number" id="pay" name="pay" class="form-control"
-                                    value="{{isset($payment) ? $payment->pay : ''}}" required autocomplete="name" autofocus>
+                                    value="{{isset($payment) ? $payment->pay : ''}}" required autocomplete="name"
+                                    autofocus>
                             </div>
                             <div class="form-group">
                                 <label for="phone_number">Edit Type</label>
                                 <select name="description" id="" class="form-control">
                                     <option value="">Choose One</option>
                                     <option value="dp" {{$payment->description == 'dp' ? 'selected' : ''}}>DP</option>
-                                    <option value="pelunasan" {{$payment->description == 'pelunasan' ? 'selected' : ''}}>Pelunasan</option>
-                                    <option value="lain" {{$payment->description == 'lain' ? 'selected' : ''}}>Lainnya</option>
+                                    <option value="pelunasan"
+                                        {{$payment->description == 'pelunasan' ? 'selected' : ''}}>Pelunasan</option>
+                                    <option value="lain" {{$payment->description == 'lain' ? 'selected' : ''}}>Lainnya
+                                    </option>
                                 </select>
                             </div>
                             <div class="form-group">
@@ -70,7 +79,8 @@
                                 <div class="input-group">
                                     <div class="input-group date" id="datetimepicker7" data-target-input="nearest">
                                         <input type="text" name="date" class="form-control datetimepicker-input"
-                                            data-target="#datetimepicker7" data-toggle="datetimepicker" autocomplete="off" value="{{isset($payment) ? $payment->date : ''}}" />
+                                            data-target="#datetimepicker7" data-toggle="datetimepicker"
+                                            autocomplete="off" value="{{isset($payment) ? $payment->date : ''}}" />
                                         <div class="input-group-append" data-target="#datetimepicker7">
                                             <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                         </div>
