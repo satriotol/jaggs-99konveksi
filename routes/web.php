@@ -33,6 +33,7 @@ Route::group(['middleware' => ['admin']], function () {
     Route::get('/create', 'UserController@create')->name('user.create');
     Route::get('/role','UserController@createadmin')->name('user.admin');
     Route::get('/role/{user}', 'UserController@editadmin')->name('user.editadmin');
+    Route::get('/income','PaymentController@index_income')->name('payment.income');
 });
 
 

@@ -110,8 +110,6 @@
                     <a href="#" class="nav-link">Contact</a>
                 </li>
             </ul>
-
-            <!-- SEARCH FORM -->
             <form class="form-inline ml-3">
                 <div class="input-group input-group-sm">
                     <input class="form-control form-control-navbar" type="search" placeholder="Search"
@@ -125,20 +123,13 @@
             </form>
 
         </nav>
-        <!-- /.navbar -->
-
-        <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
-            <!-- Brand Logo -->
             <a href="index3.html" class="brand-link">
                 <img src="{{asset('dist/img/AdminLTELogo.png')}}" alt="AdminLTE Logo"
                     class="brand-image img-circle elevation-3" style="opacity: .8">
                 <span class="brand-text font-weight-light"><b>JAGGS</b>.id</span>
             </a>
-
-            <!-- Sidebar -->
             <div class="sidebar">
-                <!-- Sidebar user panel (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="image">
                         <img src="{{asset('dist/img/user2-160x160.jpg')}}" class="img-circle elevation-2"
@@ -148,8 +139,6 @@
                         <a href="#" class="d-block">{{ Auth::user()->name }}</a>
                     </div>
                 </div>
-
-                <!-- Sidebar Menu -->
                 <nav class="mt-2 user-panel">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                         data-accordion="false">
@@ -179,8 +168,8 @@
                                 </p>
                             </a>
                         </li>
-                        <li class="nav-item has-treeview">
-                            <a href="#" class="nav-link">
+                        <li class="nav-item has-treeview {{ Request::routeIs('payment.income') ? 'menu-open' : '' }}">
+                            <a href="#" class="nav-link {{ Request::routeIs('payment.income') ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-money-bill"></i>
                                 <p>
                                     Cash Flow
@@ -195,7 +184,7 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="" class="nav-link {{ Request::routeIs('user.create') ? 'active' : '' }}">
+                                    <a href="{{route('payment.income')}}" class="nav-link {{ Request::routeIs('payment.income') ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Income</p>
                                     </a>
@@ -271,22 +260,18 @@
                         </li>
                     </ul>
                 </nav>
-                <!-- /.sidebar-menu -->
             </div>
-            <!-- /.sidebar -->
         </aside>
         @endif
-
         @yield('content')
         <!-- /.content-wrapper -->
         <footer class="main-footer">
-            <strong>Copyright &copy; 2014-2019 <a href="http://adminlte.io">AdminLTE.io</a>.</strong>
+            <strong>Copyright &copy; {{ now()->year }} <a href="http://adminlte.io">Jaggs.Id</a>.</strong>
             All rights reserved.
             <div class="float-right d-none d-sm-inline-block">
                 <b>Version</b> 3.0.5
             </div>
         </footer>
-
         <!-- Control Sidebar -->
         <aside class="control-sidebar control-sidebar-dark">
             <!-- Control sidebar content goes here -->

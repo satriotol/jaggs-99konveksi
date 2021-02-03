@@ -18,6 +18,11 @@ class PaymentController extends Controller
     {
         //
     }
+    public function index_income()
+    {
+        $incomes = Payment::where('type','=','income')->get();
+        return view('payment.index_income')->with('incomes',$incomes);
+    }
 
     /**
      * Show the form for creating a new resource.
