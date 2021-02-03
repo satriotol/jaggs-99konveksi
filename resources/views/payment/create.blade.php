@@ -59,6 +59,7 @@
                             <div class="form-group">
                                 <label for="phone_number">Edit Type</label>
                                 <select name="description" id="" class="form-control">
+                                    <option value="">Choose One</option>
                                     <option value="dp" {{$payment->description == 'dp' ? 'selected' : ''}}>DP</option>
                                     <option value="pelunasan" {{$payment->description == 'pelunasan' ? 'selected' : ''}}>Pelunasan</option>
                                     <option value="lain" {{$payment->description == 'lain' ? 'selected' : ''}}>Lainnya</option>
@@ -82,7 +83,7 @@
         </div>
         <div class="row">
             <div class="col-12">
-                <a href="#" class="btn btn-secondary">Cancel</a>
+                <a href="{{url()->previous()}}" class="btn btn-secondary">Cancel</a>
                 <input type="submit" value="Submit" class="btn btn-success float-right">
             </div>
             </form>
