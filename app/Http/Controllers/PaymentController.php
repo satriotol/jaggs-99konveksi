@@ -23,6 +23,11 @@ class PaymentController extends Controller
         $incomes = Payment::where('type','=','income')->get();
         return view('payment.index_income')->with('incomes',$incomes);
     }
+    public function index_outcome()
+    {
+        $outcomes = Payment::where('type','=','outcome')->get();
+        return view('payment.index_outcome')->with('outcomes',$outcomes);
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -33,6 +38,10 @@ class PaymentController extends Controller
     {
         //
     }
+    public function create_outcome()
+    {
+        return view('payment.create_outcome');
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -41,6 +50,18 @@ class PaymentController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(CreatePaymentRequest $request)
+    {
+        Payment::create([
+            'order_id' => $request->order_id,
+            'pay' => $request->pay,
+            'type' => $request->type,
+            'date' => $request->date,
+            'description'=> $request->description
+        ]);
+        session()->flash('success','Payment Create Successfully');
+        return redirect()->back();
+    }
+    public function store_outcome(CreatePaymentRequest $request)
     {
         Payment::create([
             'order_id' => $request->order_id,
