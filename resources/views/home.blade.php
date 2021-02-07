@@ -28,8 +28,11 @@
                     <!-- small box -->
                     <div class="small-box bg-info">
                         <div class="inner">
+                            @if (auth()->user()->isAdmin())
                             <h3>{{$orders}}</h3>
-
+                            @else
+                            <h3>{{$orderuser}}</h3>
+                            @endif
                             <p>Orders</p>
                         </div>
                         <div class="icon">
@@ -54,12 +57,12 @@
                     </div>
                 </div> --}}
                 <!-- ./col -->
+                @if (auth()->user()->isAdmin())
                 <div class="col-lg-3 col-6">
                     <!-- small box -->
                     <div class="small-box bg-warning">
                         <div class="inner">
                             <h3>{{$users}}</h3>
-
                             <p>User</p>
                         </div>
                         <div class="icon">
@@ -68,6 +71,7 @@
                         <a href="" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
+                @endif
                 <!-- ./col -->
                 {{-- <div class="col-lg-3 col-6">
                     <!-- small box -->

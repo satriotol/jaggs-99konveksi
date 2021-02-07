@@ -6,12 +6,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>DataTables</h1>
+                    <h1>Invoice</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">DataTables</li>
+                        <li class="breadcrumb-item active">Invoice</li>
                     </ol>
                 </div>
             </div>
@@ -24,7 +24,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">DataTable with default features</h3>
+                            <h3 class="card-title">Invoice</h3>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
@@ -42,13 +42,15 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @if (auth()->user()->isAdmin())
                                     @foreach ($orders as $order)
                                     <tr>
                                         <td>{{$order->judul}}</td>
                                         <td><a href="{{route('orders.show',$order->id)}}" type="button"
                                                 class="btn btn-outline-info">Info</a>
-                                                <button class="btn btn-outline-danger" id="deleteCategoryForm" onclick="handleDelete({{$order->id}})">Delete</button>
-                                            </td>
+                                            <button class="btn btn-outline-danger" id="deleteCategoryForm"
+                                                onclick="handleDelete({{$order->id}})">Delete</button>
+                                        </td>
                                         <td>{{$order->cust_name}}</td>
                                         <td>{{$order->cust_phone}}</td>
                                         <?php $sum_qty = 0?>
@@ -65,6 +67,34 @@
                                         <td>{{$order->end_date}}</td>
                                     </tr>
                                     @endforeach
+                                    @else
+                                    @foreach ($orders as $order)
+                                    @if ($order->user_id === Auth::user()->id)
+                                    <tr>
+                                        <td>{{$order->judul}}</td>
+                                        <td><a href="{{route('orders.show',$order->id)}}" type="button"
+                                                class="btn btn-outline-info">Info</a>
+                                            <button class="btn btn-outline-danger" id="deleteCategoryForm"
+                                                onclick="handleDelete({{$order->id}})">Delete</button>
+                                        </td>
+                                        <td>{{$order->cust_name}}</td>
+                                        <td>{{$order->cust_phone}}</td>
+                                        <?php $sum_qty = 0?>
+                                        @foreach ($order->orderdetail as $od)
+                                        <?php $sum_qty += $od->qty ?>
+                                        @endforeach
+                                        <td>{{$sum_qty}}</td>
+                                        <?php $sum_price =0 ?>
+                                        @foreach ($order->orderdetail as $od)
+                                        <?php $sum_price += $od->price * $od->qty ?>
+                                        @endforeach
+                                        <td>Rp. {{number_format($sum_price,2)}}</td>
+                                        <td>{{$order->start_date}}</td>
+                                        <td>{{$order->end_date}}</td>
+                                    </tr>
+                                    @endif
+                                    @endforeach
+                                    @endif
                                 </tbody>
                                 <tfoot>
                                     <tr>
@@ -142,7 +172,7 @@
             "paging": true,
             dom: 'Bfrtip',
             buttons: [
-            'copy', 'csv', 'excel','print'
+                'copy', 'csv', 'excel', 'print'
             ],
         });
         $('#example2').DataTable({
@@ -155,6 +185,7 @@
             "responsive": true,
         });
     });
+
 </script>
 <script>
     function handleDelete(id) {
@@ -162,5 +193,6 @@
         form.action = '/orders/' + id;
         $('#deleteModal').modal('show');
     }
+
 </script>
 @endsection

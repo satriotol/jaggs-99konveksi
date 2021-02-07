@@ -165,6 +165,7 @@
                                 </p>
                             </a>
                         </li>
+                        @if (auth()->user()->isAdmin())
                         <li class="nav-item has-treeview {{ Request::routeIs('payment.income','payment.outcome') ? 'menu-open' : '' }}">
                             <a href="#" class="nav-link {{ Request::routeIs('payment.income','payment.outcome') ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-money-bill"></i>
@@ -194,6 +195,7 @@
                                 </li>
                             </ul>
                         </li>
+                        @endif
                         <li
                             class="nav-item has-treeview {{ (request()->segment(1)== 'user') ? 'menu-open' : '' }} {{ Request::routeIs('user.admin','user.create') ? 'menu-open' : '' }}">
                             <a href="#"
