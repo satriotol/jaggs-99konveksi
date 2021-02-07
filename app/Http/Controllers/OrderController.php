@@ -104,6 +104,7 @@ class OrderController extends Controller
     {
         $order->delete();
         $order->orderdetail()->delete();
+        $order->payment()->delete();
         session()->flash('success','Order Deleted Successfully');
         return redirect(route('orders.index'));
     }
