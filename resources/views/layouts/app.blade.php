@@ -165,8 +165,8 @@
                                 </p>
                             </a>
                         </li>
-                        <li class="nav-item has-treeview {{ Request::routeIs('payment.income') ? 'menu-open' : '' }}">
-                            <a href="#" class="nav-link {{ Request::routeIs('payment.income') ? 'active' : '' }}">
+                        <li class="nav-item has-treeview {{ Request::routeIs('payment.income','payment.outcome') ? 'menu-open' : '' }}">
+                            <a href="#" class="nav-link {{ Request::routeIs('payment.income','payment.outcome') ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-money-bill"></i>
                                 <p>
                                     Cash Flow
@@ -187,7 +187,7 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="" class="nav-link {{ Request::routeIs('user.admin') ? 'active' : '' }}">
+                                    <a href="{{route('payment.outcome')}}" class="nav-link {{ Request::routeIs('payment.outcome') ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Outcome</p>
                                     </a>
@@ -195,9 +195,9 @@
                             </ul>
                         </li>
                         <li
-                            class="nav-item has-treeview {{ (request()->segment(1)== 'user') ? 'menu-open' : '' }} {{ Request::routeIs('user.admin') ? 'menu-open' : '' }} {{ Request::routeIs('user.create') ? 'menu-open' : '' }}">
+                            class="nav-item has-treeview {{ (request()->segment(1)== 'user') ? 'menu-open' : '' }} {{ Request::routeIs('user.admin','user.create') ? 'menu-open' : '' }}">
                             <a href="#"
-                                class="nav-link {{ (request()->segment(1)== 'user') ? 'active' : '' }} {{ Request::routeIs('user.admin') ? 'active' : '' }} {{ Request::routeIs('user.create') ? 'active' : '' }}">
+                                class="nav-link {{ (request()->segment(1)== 'user') ? 'active' : '' }} {{ Request::routeIs('user.admin','user.create') ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-user-cog"></i>
                                 <p>
                                     User Setting

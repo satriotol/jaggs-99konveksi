@@ -34,6 +34,10 @@ Route::group(['middleware' => ['admin']], function () {
     Route::get('/role','UserController@createadmin')->name('user.admin');
     Route::get('/role/{user}', 'UserController@editadmin')->name('user.editadmin');
     Route::get('/income','PaymentController@index_income')->name('payment.income');
+    Route::get('/outcome','PaymentController@index_outcome')->name('payment.outcome');
+    Route::get('/outcome/create','PaymentController@create_outcome')->name('payment.outcomecreate');
+    Route::post('/outcome/create','PaymentController@store_outcome')->name('payment.storeoutcome');
+
 });
 
 
