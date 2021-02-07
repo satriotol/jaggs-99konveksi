@@ -31,7 +31,7 @@
                             @endphp
                             @foreach ($outcomes as $outcome)
                             @php
-                                $outcome_total =+ $outcome->pay
+                                $outcome_total += $outcome->pay
                             @endphp
                             @endforeach
                             <h3>Total Pengeluaran : Rp. {{number_format($outcome_total,2)}}</h3>

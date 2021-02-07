@@ -32,7 +32,7 @@
                             @endphp
                             @foreach ($incomes as $income)
                             @php
-                                $income_total =+ $income->pay
+                                $income_total += $income->pay
                             @endphp
                             @endforeach
                             <h3>Total Pemasukan : Rp. {{number_format($income_total,2)}}</h3>
