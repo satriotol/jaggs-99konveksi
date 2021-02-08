@@ -50,7 +50,7 @@
                                 class="form-control">
                             <div class="form-group">
                                 <label for="inputName">Title</label>
-                                <input type="text" id="inputName" name="judul" class="form-control">
+                                <input type="text" id="inputName" name="judul" class="form-control" autocomplete="off">
                             </div>
                             <div class="form-group">
                                 <label>Start Date</label>
@@ -78,15 +78,15 @@
                             </div>
                             <div class="form-group">
                                 <label for="inputName">Customer Name</label>
-                                <input type="text" id="inputName" name="cust_name" class="form-control">
+                                <input type="text" id="inputName" name="cust_name" autocomplete="off" class="form-control">
                             </div>
                             <div class="form-group">
                                 <label for="inputName">Customer Email</label>
-                                <input type="text" id="inputName" name="cust_email" class="form-control">
+                                <input type="text" id="inputName" name="cust_email" class="form-control" autocomplete="off">
                             </div>
                             <div class="form-group">
                                 <label for="inputName">Customer Phone</label>
-                                <input type="text" id="inputName" name="cust_phone" class="form-control">
+                                <input type="number" id="inputName" name="cust_phone" class="form-control" autocomplete="off">
                             </div>
                         </div>
                 </div>

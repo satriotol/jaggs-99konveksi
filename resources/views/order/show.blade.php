@@ -78,7 +78,8 @@
                                                 <form action="{{route('orderdetail.destroy',$od->id)}}" method="POST">
                                                     @method('DELETE')
                                                     @csrf
-                                                    <small><input type="submit" style="color: red" value="delete"></small>
+                                                    <small><input type="submit" style="color: red"
+                                                            value="delete"></small>
                                                 </form>
                                             </td>
                                             <td>{{$od->qty}} pcs</td>
@@ -117,7 +118,8 @@
                                                         @method('DELETE')
                                                         @csrf
                                                         <input type="submit" class="btn btn-danger" value="delete">
-                                                        <a class="btn btn-warning" href="{{route('payments.edit',$payment->id)}}">Edit</a>
+                                                        <a class="btn btn-warning"
+                                                            href="{{route('payments.edit',$payment->id)}}">Edit</a>
                                                     </form>
                                                 </th>
                                                 <td>Rp. {{number_format($payment->pay,2)}}</td>
@@ -153,8 +155,8 @@
                                     style="margin-right: 5px;">
                                     <i class="fas fa-paper-plane"></i> Send Email
                                 </a>
-                                <a href="{{route('print_pdf',$order->id)}}" class="btn btn-primary float-right"
-                                    style="margin-right: 5px;">
+                                <a href="{{route('print_pdf',$order->id)}}" id="btn-pdf"
+                                    class="btn btn-primary float-right" style="margin-right: 5px;">
                                     <i class="fas fa-download"></i> Generate PDF
                                 </a>
                             </div>
@@ -252,6 +254,20 @@
     </div>
     <!-- /.modal-dialog -->
 </div>
+<div class="modal" id="show-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Please Wait</h4>
+            </div>
+            <div class="modal-body">
+                <p>Please Wait, This is will finish soon.</p>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
 
 <!-- /.modal -->
 
@@ -309,5 +325,13 @@
         });
     });
 
+</script>
+<script>
+    $("#btn-pdf").click(function () {
+        $("#show-modal").modal({
+            keyboard : false,
+            backdrop: 'static',
+        });
+    });
 </script>
 @endsection
