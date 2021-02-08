@@ -151,7 +151,7 @@
                                     Payment
                                 </button>
                                 @endif
-                                <a href="{{route('send_invoice',$order->id)}}" id="btn-pdf" class="btn btn-primary float-right"
+                                <a href="{{route('send_invoice',$order->id)}}" class="btn btn-primary float-right"
                                     style="margin-right: 5px;">
                                     <i class="fas fa-paper-plane"></i> Send Email
                                 </a>
@@ -330,5 +330,6 @@
     $("#btn-pdf").click(function () {
         $("#show-modal").modal('show');
     });
+
 </script>
 @endsection
