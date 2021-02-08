@@ -113,7 +113,7 @@
 
 <body>
     <div class="left-asset">
-        <img class="img-logo" src="https://ninetyninekonveksi.jagsstore.com/99logo-min.png" alt="">
+        <img class="img-logo" src="https://ninetyninekonveksi.jagsstore.com/99logo-min.jpg" alt="">
         <p class="title color-dg">
             Faktur INV/{{ $order->id }}
         </p>
@@ -143,7 +143,7 @@
             @foreach ($order->payment as $pay)
             <tr>
                 <th class="none-border" colspan="2"></th>
-                <th colspan="1" style="color: black;text-align: left;">Dibayar pada</th>
+                <th colspan="1" style="color: black;text-align: left;">Dibayar pada <br><small><i>{{$pay->date}}</i></small></th>
                 <td>Rp {{ number_format($pay->pay,2) }}</td>
             </tr>
             <?php $sum_kekurangan += $pay->pay?>
