@@ -312,6 +312,7 @@
     {{-- <script src="{{asset('dist/js/pages/dashboard.js')}}"></script> --}}
     <!-- AdminLTE for demo purposes -->
     <script src="{{asset('dist/js/demo.js')}}"></script>
+    <script src="{{asset('js/simple.money.format.js')}}"></script>
     @yield('script')
 </body>
 

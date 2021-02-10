@@ -31,7 +31,7 @@
                                 <i class="fas fa-minus"></i></button>
                         </div>
                     </div>
-                    <form action="{{isset($user) ? route('user.update',$user->id): route('user.store')}}" method="post">
+                    <form action="{{isset($user) ? route('user.updateadmin',$user->id): route('user.store')}}" method="post">
                         @csrf
                         @if (isset($user))
                         @method('PUT')
@@ -57,7 +57,7 @@
                                     value="{{isset($user) ? $user->name : ''}}" required autocomplete="name" autofocus>
                             </div>
                             <div class="form-group">
-                                <label for="phone_number">Edit Role</label>
+                                <label for="role">Edit Role</label>
                                 <select name="role" id="" class="form-control">
                                     <option value="user" {{$user->role == 'user' ? 'selected' : ''}}>User</option>
                                     <option value="admin" {{$user->role == 'admin' ? 'selected' : ''}}>Admin</option>
