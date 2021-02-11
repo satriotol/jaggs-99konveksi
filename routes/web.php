@@ -38,7 +38,7 @@ Route::group(['middleware' => ['admin']], function () {
     Route::get('/outcome','PaymentController@index_outcome')->name('payment.outcome');
     Route::get('/outcome/create','PaymentController@create_outcome')->name('payment.outcomecreate');
     Route::post('/outcome/create','PaymentController@store_outcome')->name('payment.storeoutcome');
-
+    Route::get('/yourorder','OrderController@indexinvoice')->name('order.your');
 });
 
 

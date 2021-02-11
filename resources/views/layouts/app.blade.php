@@ -156,6 +156,29 @@
                                 </p>
                             </a>
                         </li>
+                        {{-- <li class="nav-item has-treeview {{ Request::routeIs('orders.index','order.your') ? 'menu-open' : '' }}">
+                            <a href="#" class="nav-link {{ Request::routeIs('orders.index','order.your') ? 'active' : '' }}">
+                                <i class="nav-icon fas fa-table"></i>
+                                <p>
+                                    Invoice
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{{route('orders.index')}}" class="nav-link {{ Request::routeIs('orders.index') ? 'active' : '' }}">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Invoice</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{route('order.your')}}" class="nav-link {{ Request::routeIs('order.your') ? 'active' : '' }}">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Your Invoice</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li> --}}
                         <li class="nav-item">
                             <a href="{{route('orders.create')}}"
                                 class="nav-link {{ Request::routeIs('orders.create') ? 'active' : '' }}">

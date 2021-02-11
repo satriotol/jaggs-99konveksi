@@ -23,6 +23,10 @@ class OrderController extends Controller
     {
         return view('order.index')->with('orders', Order::all());
     }
+    public function indexinvoice()
+    {
+        return view('order.index')->with('orders', Order::all());
+    }
 
     /**
      * Show the form for creating a new resource.
