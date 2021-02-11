@@ -33,6 +33,7 @@ Route::group(['middleware' => ['admin']], function () {
     Route::get('/create', 'UserController@create')->name('user.create');
     Route::get('/role','UserController@createadmin')->name('user.admin');
     Route::get('/role/{user}', 'UserController@editadmin')->name('user.editadmin');
+    Route::put('/role/{user}','UserController@updateadmin')->name('user.updateadmin');
     Route::get('/income','PaymentController@index_income')->name('payment.income');
     Route::get('/outcome','PaymentController@index_outcome')->name('payment.outcome');
     Route::get('/outcome/create','PaymentController@create_outcome')->name('payment.outcomecreate');

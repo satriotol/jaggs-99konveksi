@@ -31,6 +31,7 @@
                             <table id="example1" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
+                                        <th>Marketing</th>
                                         <th>Title</th>
                                         <th>Action</th>
                                         <th>Customer Name</th>
@@ -45,6 +46,7 @@
                                     @if (auth()->user()->isAdmin())
                                     @foreach ($orders as $order)
                                     <tr>
+                                        <td>{{$order->user->name}}</td>
                                         <td>{{$order->judul}}</td>
                                         <td><a href="{{route('orders.show',$order->id)}}" type="button"
                                                 class="btn btn-outline-info">Info</a>
@@ -98,6 +100,7 @@
                                 </tbody>
                                 <tfoot>
                                     <tr>
+                                        <th>Marketing</th>
                                         <th>Title</th>
                                         <th>Action</th>
                                         <th>Customer Name</th>

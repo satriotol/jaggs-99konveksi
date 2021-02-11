@@ -48,7 +48,7 @@ class UserController extends Controller
             'role' => $request['role']
         ]);
         session()->flash('success','User Role Update Successfully');
-        return redirect(route('home'));
+        return redirect(route('user.admin'));
     }
 
     /**

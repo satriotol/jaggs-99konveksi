@@ -189,12 +189,8 @@
                             </div>
                             <div class="form-group">
                                 <label for="inputName">Price</label>
-                                <input type="number" id="inputprice" autocomplete="off" name="price"
-                                    class="form-control calc">
-                            </div>
-                            <div class="form-group">
-                                <label for="inputName">Total Price</label>
-                                <input type="text" readonly id="inputtotal" name="subtotal" class="form-control">
+                                <input type="text" id="inputprice" autocomplete="off" name="price"
+                                    class="form-control calc money">
                             </div>
                             <input type="submit" value="Add Items" class="btn btn-success float-right">
                         </form>
@@ -291,15 +287,6 @@
 
 </script>
 <script>
-    var totalvalue = $("#inputtotal");
-    $(".calc").keyup(function () {
-        var qtyvalue = parseFloat($("#inputqty").val());
-        var pricevalue = parseFloat($("#inputprice").val());
-        totalvalue.val(pricevalue * qtyvalue);
-    });
-
-</script>
-<script>
     $(function () {
         $("#example1").DataTable({
             "responsive": true,
@@ -330,6 +317,10 @@
     $("#btn-pdf").click(function () {
         $("#show-modal").modal('show');
     });
+
+</script>
+<script>
+    $('.money').simpleMoneyFormat();
 
 </script>
 @endsection
