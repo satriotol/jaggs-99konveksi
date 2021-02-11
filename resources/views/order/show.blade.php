@@ -190,7 +190,11 @@
                             <div class="form-group">
                                 <label for="inputName">Price</label>
                                 <input type="text" id="inputprice" autocomplete="off" name="price"
-                                    class="form-control calc money">
+                                    class="form-control calc">
+                            </div>
+                            <div class="form-group">
+                                <label for="inputName">Total Price</label>
+                                <input type="text" readonly id="inputtotal" name="subtotal" class="form-control">
                             </div>
                             <input type="submit" value="Add Items" class="btn btn-success float-right">
                         </form>
@@ -274,6 +278,14 @@
 <script src="{{asset('plugins/datatables-responsive/js/dataTables.responsive.min.js')}}"></script>
 <script src="{{asset('plugins/datatables-responsive/js/responsive.bootstrap4.min.js')}}"></script>
 <script src="{{asset('plugins/toastr/toastr.min.js')}}"></script>
+<script>
+    var totalvalue = $("#inputtotal");
+    $(".calc").keyup(function () {
+        var qtyvalue = parseFloat($("#inputqty").val());
+        var pricevalue = parseFloat($("#inputprice").val());
+        totalvalue.val(pricevalue * qtyvalue);
+    });
+</script>
 <script type="text/javascript">
     $(function () {
         $('#datetimepicker7').datetimepicker({
