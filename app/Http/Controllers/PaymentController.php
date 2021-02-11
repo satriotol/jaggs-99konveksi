@@ -68,6 +68,7 @@ class PaymentController extends Controller
             'pay' => $request->pay,
             'type' => $request->type,
             'date' => $request->date,
+            'ket' => $request->ket,
             'description'=> $request->description
         ]);
         session()->flash('success','Payment Create Successfully');

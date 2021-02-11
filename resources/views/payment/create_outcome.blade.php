@@ -91,6 +91,12 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="form-group">
+                                <label for="">Keterangan</label>
+                                <div class="input-group">
+                                    <textarea name="ket" id="" rows="5" class="form-control"></textarea>
+                                </div>
+                            </div>
                         </div>
                 </div>
             </div>
