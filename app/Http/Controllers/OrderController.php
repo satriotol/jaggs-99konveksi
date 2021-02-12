@@ -25,7 +25,7 @@ class OrderController extends Controller
     }
     public function indexinvoice()
     {
-        return view('order.index')->with('orders', Order::all());
+        return view('order.yourindex')->with('orders', Order::all());
     }
 
     /**

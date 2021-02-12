@@ -147,17 +147,11 @@
                                 </p>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="{{route('orders.index')}}"
-                                class="nav-link {{ Request::routeIs('orders.index') ? 'active' : '' }}">
-                                <i class="nav-icon fas fa-table"></i>
-                                <p>
-                                    Invoice
-                                </p>
-                            </a>
-                        </li>
-                        {{-- <li class="nav-item has-treeview {{ Request::routeIs('orders.index','order.your') ? 'menu-open' : '' }}">
-                            <a href="#" class="nav-link {{ Request::routeIs('orders.index','order.your') ? 'active' : '' }}">
+                        @if (auth()->user()->isAdmin())
+                        <li
+                            class="nav-item has-treeview {{ Request::routeIs('orders.index','order.your') ? 'menu-open' : '' }}">
+                            <a href="#"
+                                class="nav-link {{ Request::routeIs('orders.index','order.your') ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-table"></i>
                                 <p>
                                     Invoice
@@ -168,17 +162,29 @@
                                 <li class="nav-item">
                                     <a href="{{route('orders.index')}}" class="nav-link {{ Request::routeIs('orders.index') ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Invoice</p>
+                                        <p>All Invoice</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{route('order.your')}}" class="nav-link {{ Request::routeIs('order.your') ? 'active' : '' }}">
+                                    <a href="{{route('order.your')}}"
+                                        class="nav-link {{ Request::routeIs('order.your') ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Your Invoice</p>
                                     </a>
                                 </li>
                             </ul>
-                        </li> --}}
+                        </li>
+                        @else
+                        <li class="nav-item">
+                            <a href="{{route('orders.index')}}"
+                                class="nav-link {{ Request::routeIs('orders.index') ? 'active' : '' }}">
+                                <i class="nav-icon fas fa-table"></i>
+                                <p>
+                                    Invoice
+                                </p>
+                            </a>
+                        </li>
+                        @endif
                         <li class="nav-item">
                             <a href="{{route('orders.create')}}"
                                 class="nav-link {{ Request::routeIs('orders.create') ? 'active' : '' }}">
@@ -189,8 +195,10 @@
                             </a>
                         </li>
                         @if (auth()->user()->isAdmin())
-                        <li class="nav-item has-treeview {{ Request::routeIs('payment.income','payment.outcome') ? 'menu-open' : '' }}">
-                            <a href="#" class="nav-link {{ Request::routeIs('payment.income','payment.outcome') ? 'active' : '' }}">
+                        <li
+                            class="nav-item has-treeview {{ Request::routeIs('payment.income','payment.outcome') ? 'menu-open' : '' }}">
+                            <a href="#"
+                                class="nav-link {{ Request::routeIs('payment.income','payment.outcome') ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-money-bill"></i>
                                 <p>
                                     Cash Flow
@@ -205,13 +213,15 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{route('payment.income')}}" class="nav-link {{ Request::routeIs('payment.income') ? 'active' : '' }}">
+                                    <a href="{{route('payment.income')}}"
+                                        class="nav-link {{ Request::routeIs('payment.income') ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Income</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{route('payment.outcome')}}" class="nav-link {{ Request::routeIs('payment.outcome') ? 'active' : '' }}">
+                                    <a href="{{route('payment.outcome')}}"
+                                        class="nav-link {{ Request::routeIs('payment.outcome') ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Outcome</p>
                                     </a>
