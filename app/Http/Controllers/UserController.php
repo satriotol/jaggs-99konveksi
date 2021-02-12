@@ -114,7 +114,7 @@ class UserController extends Controller
         ]);
         session()->flash('success','User Update Successfully');
 
-        return redirect(route('home'));
+        return redirect(route('user.index'));
     }
     public function updateemail(UpdateUserEmailRequest $request,User $user)
     {
@@ -122,7 +122,7 @@ class UserController extends Controller
             'email' => $request['email']
         ]);
         session()->flash('success','Tag Update Successfully');
-        return redirect(route('home'));
+        return redirect(route('user.edit',$user->id));
     }
 
     /**

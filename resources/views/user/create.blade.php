@@ -76,7 +76,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="Password"></label>
-                                <a href="">Change Password</a>
+                                <a href="">Change Password <i>(on proccess)</i></a>
                             </div>
                             @else
                             <div class="form-group">
@@ -97,8 +97,9 @@
         </div>
         <div class="row">
             <div class="col-12">
+
                 <a href="{{url()->previous()}}" class="btn btn-secondary">Cancel</a>
-                <input type="submit" value="Register" class="btn btn-success float-right">
+                <input type="submit" value="{{isset($user) ? "Update" : "Register"}}" class="btn btn-success float-right">
             </div>
             </form>
         </div>
