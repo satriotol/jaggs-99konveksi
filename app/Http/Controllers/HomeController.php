@@ -31,4 +31,9 @@ class HomeController extends Controller
         $users = User::all()->count();
         return view('home')->with('orders',$orders)->with('users',$users)->with('orderuser',$orderuser);
     }
+    public function profile()
+    {
+        $orders = Order::where('user_id',Auth::user()->id)->get();
+        return view('profile')->with('orders',$orders);
+    }
 }
