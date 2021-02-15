@@ -33,7 +33,7 @@ class HomeController extends Controller
     }
     public function profile()
     {
-        $orders = Order::where('user_id',Auth::user()->id)->get();
+        $orders = Order::where('user_id',Auth::user()->id)->orderBy('id','desc')->simplePaginate(5);
         return view('profile')->with('orders',$orders);
     }
 }

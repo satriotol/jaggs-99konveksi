@@ -59,36 +59,9 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <strong><i class="fas fa-book mr-1"></i> Education</strong>
-
-                            <p class="text-muted">
-                                B.S. in Computer Science from the University of Tennessee at Knoxville
-                            </p>
-
-                            <hr>
-
                             <strong><i class="fas fa-map-marker-alt mr-1"></i> Location</strong>
-
-                            <p class="text-muted">Malibu, California</p>
-
-                            <hr>
-
-                            <strong><i class="fas fa-pencil-alt mr-1"></i> Skills</strong>
-
-                            <p class="text-muted">
-                                <span class="tag tag-danger">UI Design</span>
-                                <span class="tag tag-success">Coding</span>
-                                <span class="tag tag-info">Javascript</span>
-                                <span class="tag tag-warning">PHP</span>
-                                <span class="tag tag-primary">Node.js</span>
-                            </p>
-
-                            <hr>
-
-                            <strong><i class="far fa-file-alt mr-1"></i> Notes</strong>
-
-                            <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam
-                                fermentum enim neque.</p>
+                            <p class="text-muted">Jl. Pete Sel. No.28, Sekaran, Kec. Gn. Pati, Kota Semarang, Jawa
+                                Tengah 50229</p>
                         </div>
                         <!-- /.card-body -->
                     </div>
@@ -118,18 +91,13 @@
                                                 src="../../dist/img/user7-128x128.jpg" alt="User Image">
                                             <span class="username">
                                                 <a href="{{route('orders.show',$order->id)}}">{{$order->judul}}</a>
-                                                <a href="#" class="float-right btn-tool"><i
-                                                        class="fas fa-times"></i></a>
                                             </span>
-                                            <span class="description">{{$order->start_date}} - {{$order->end_date}}</span>
+                                            <span class="description">{{$order->start_date}} -
+                                                {{$order->end_date}}</span>
                                         </div>
                                         <!-- /.user-block -->
                                         <p>
-                                            Lorem ipsum represents a long-held tradition for designers,
-                                            typographers and the like. Some people hate it and argue for
-                                            its demise, but others ignore the hate as they create awesome
-                                            tools to help create filler text for everyone from bacon lovers
-                                            to Charlie Sheen fans.
+                                            {{$order->cust_name}},{{$order->cust_phone}}
                                         </p>
 
                                         <form class="form-horizontal">
@@ -142,6 +110,8 @@
                                         </form>
                                     </div>
                                     @endforeach
+                                    {{ $orders->links() }}
+
 
                                     <!-- /.post -->
                                 </div>
