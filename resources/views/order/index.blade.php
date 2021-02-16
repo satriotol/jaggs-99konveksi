@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('content')
+
 <div class="content-wrapper" style="min-height: 1200.88px;">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -173,19 +174,11 @@
             "info": true,
             "ordering": true,
             "paging": true,
+            "order": [[ 8, "desc" ]],
             dom: 'Bfrtip',
             buttons: [
                 'copy', 'csv', 'excel', 'print'
             ],
-        });
-        $('#example2').DataTable({
-            "paging": true,
-            "lengthChange": false,
-            "searching": false,
-            "ordering": true,
-            "info": true,
-            "autoWidth": false,
-            "responsive": true,
         });
     });
 

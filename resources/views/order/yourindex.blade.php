@@ -146,6 +146,7 @@
             "info": true,
             "ordering": true,
             "paging": true,
+            "order": [[ 8, "desc" ]],
             dom: 'Bfrtip',
             buttons: [
                 'copy', 'csv', 'excel', 'print'
