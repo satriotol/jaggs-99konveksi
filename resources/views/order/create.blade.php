@@ -107,11 +107,11 @@
 <script type="text/javascript">
     $(function () {
         $('#datetimepicker7').datetimepicker({
-            format: 'L',
+            format: 'YYYY/MM/DD',
         });
         $('#datetimepicker8').datetimepicker({
             useCurrent: false,
-            format: 'L'
+            format: 'YYYY/MM/DD',
         });
         $("#datetimepicker7").on("change.datetimepicker", function (e) {
             $('#datetimepicker8').datetimepicker('minDate', e.date);
