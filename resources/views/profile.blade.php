@@ -97,17 +97,18 @@
                                         </div>
                                         <!-- /.user-block -->
                                         <p>
-                                            {{$order->cust_name}},{{$order->cust_phone}}
+                                            <h5>{{$order->cust_name}} / {{$order->cust_phone}}</h1>
+
                                         </p>
 
-                                        <form class="form-horizontal">
+                                        {{-- <form class="form-horizontal">
                                             <div class="input-group input-group-sm mb-0">
                                                 <input class="form-control form-control-sm" placeholder="Response">
                                                 <div class="input-group-append">
                                                     <button type="submit" class="btn btn-danger">Send</button>
                                                 </div>
                                             </div>
-                                        </form>
+                                        </form> --}}
                                     </div>
                                     @endforeach
                                     {{ $orders->links() }}
