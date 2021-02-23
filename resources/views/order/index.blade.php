@@ -46,7 +46,18 @@
                                 <tbody>
                                     @if (auth()->user()->isAdmin())
                                     @foreach ($orders as $order)
-                                    <tr>
+                                    @php $sum_tot = 0 @endphp
+                                    @php $sum_kekurangan = 0 @endphp
+                                    @foreach ($order->orderdetail as $od)
+                                    @php $sum_tot += $od->price * $od->qty @endphp
+                                    @endforeach
+                                    @foreach ($order->payment as $op)
+                                    @php $sum_kekurangan += $op->pay @endphp
+                                    @endforeach
+                                    @php $sum_lunas = $sum_tot-$sum_kekurangan @endphp
+                                    <tr @if ($sum_lunas == 0)
+                                    style="background-color: lightgreen"
+                                    @endif >
                                         <td>{{$order->user->name}}</td>
                                         <td>{{$order->judul}}</td>
                                         <td><a href="{{route('orders.show',$order->id)}}" type="button"
@@ -56,15 +67,13 @@
                                         </td>
                                         <td>{{$order->cust_name}}</td>
                                         <td>{{$order->cust_phone}}</td>
-                                        <?php $sum_qty = 0?>
+                                        @php $sum_qty = 0 @endphp
+                                        @php $sum_price = 0 @endphp
                                         @foreach ($order->orderdetail as $od)
-                                        <?php $sum_qty += $od->qty ?>
+                                        @php $sum_qty += $od->qty @endphp
+                                        @php $sum_price += $od->price * $od->qty @endphp
                                         @endforeach
                                         <td>{{$sum_qty}}</td>
-                                        <?php $sum_price =0 ?>
-                                        @foreach ($order->orderdetail as $od)
-                                        <?php $sum_price += $od->price * $od->qty ?>
-                                        @endforeach
                                         <td>Rp. {{number_format($sum_price,2)}}</td>
                                         <td>{{$order->start_date}}</td>
                                         <td>{{$order->end_date}}</td>
@@ -73,7 +82,18 @@
                                     @else
                                     @foreach ($orders as $order)
                                     @if ($order->user_id === Auth::user()->id)
-                                    <tr>
+                                    @php $sum_tot = 0 @endphp
+                                    @php $sum_kekurangan = 0 @endphp
+                                    @foreach ($order->orderdetail as $od)
+                                    @php $sum_tot += $od->price * $od->qty @endphp
+                                    @endforeach
+                                    @foreach ($order->payment as $op)
+                                    @php $sum_kekurangan += $op->pay @endphp
+                                    @endforeach
+                                    @php $sum_lunas = $sum_tot-$sum_kekurangan @endphp
+                                    <tr @if ($sum_lunas == 0)
+                                    style="background-color: lightgreen"
+                                    @endif >
                                         <td>{{$order->judul}}</td>
                                         <td><a href="{{route('orders.show',$order->id)}}" type="button"
                                                 class="btn btn-outline-info">Info</a>
@@ -174,7 +194,9 @@
             "info": true,
             "ordering": true,
             "paging": true,
-            "order": [[ 8, "desc" ]],
+            "order": [
+                [8, "desc"]
+            ],
             dom: 'Bfrtip',
             buttons: [
                 'copy', 'csv', 'excel', 'print'
