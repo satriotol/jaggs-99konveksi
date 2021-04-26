@@ -37,6 +37,11 @@
                         @method('PUT')
                         @endif
                         <div class="card-body">
+                            @if (session()->has('success'))
+                            <div class="alert alert-success">
+                                {{session()->get('success')}}
+                            </div>
+                            @endif
                             @if ($errors->any())
                             <div class="card card-danger">
                                 <div class="card-header">
@@ -76,7 +81,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="Password"></label>
-                                <a href="">Change Password <i>(on proccess)</i></a>
+                                <a href="{{route('user.editpassword',$user->id)}}">Change Password</a>
                             </div>
                             @else
                             <div class="form-group">
@@ -99,7 +104,8 @@
             <div class="col-12">
 
                 <a href="{{url()->previous()}}" class="btn btn-secondary">Cancel</a>
-                <input type="submit" value="{{isset($user) ? "Update" : "Register"}}" class="btn btn-success float-right">
+                <input type="submit" value="{{isset($user) ? "Update" : "Register"}}"
+                    class="btn btn-success float-right">
             </div>
             </form>
         </div>

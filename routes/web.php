@@ -25,6 +25,8 @@ Route::group(['middleware' => ['auth']], function () {
     ]);
     Route::put('/user/{user}/editemail','UserController@updateemail')->name('user.updateemail');
     Route::get('/user/{user}/editemail','UserController@editemail')->name('user.editemail');
+    Route::put('/user/{user}/editemail','UserController@updatepassword')->name('user.updatepassword');
+    Route::get('/user/{user}/editpassword','UserController@editpassword')->name('user.editpassword');
     Route::get('/cetak_pdf/{id}', 'OrderController@printpdf')->name('print_pdf');
     Route::get('/email/{id}','OrderController@sendemail')->name('send_invoice');
     Route::get('/profile','HomeController@profile')->name('profile');

@@ -60,11 +60,11 @@
                         <!-- /.col -->
                     </div>
                 </form>
-                @if (Route::has('password.request'))
+                {{-- @if (Route::has('password.request'))
                 <p class="mb-1">
                     <a href="{{ route('password.request') }}">I forgot my password</a>
                 </p>
-                @endif
+                @endif --}}
                 {{-- <p class="mb-0">
                     <a href="register.html" class="text-center">Register a new membership</a>
                 </p> --}}

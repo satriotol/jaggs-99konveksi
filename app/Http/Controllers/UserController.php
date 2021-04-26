@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\UpdateUserAdminRequest;
 use App\Http\Requests\UpdateUserEmailRequest;
+use App\Http\Requests\UpdateUserPasswordRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\User;
 use Illuminate\Http\Request;
@@ -122,6 +123,18 @@ class UserController extends Controller
             'email' => $request['email']
         ]);
         session()->flash('success','Tag Update Successfully');
+        return redirect(route('user.edit',$user->id));
+    }
+    public function editpassword(User $user)
+    {
+        return view('user.updatepassword')->with('user',$user);
+    }
+    public function updatepassword(UpdateUserPasswordRequest $request,User $user)
+    {
+        $user->update([
+            'password' => Hash::make($request['new_password'])
+        ]);
+        session()->flash('success','User Password Update Successfully');
         return redirect(route('user.edit',$user->id));
     }
 
