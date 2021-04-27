@@ -55,9 +55,7 @@
                                     @php $sum_kekurangan += $op->pay @endphp
                                     @endforeach
                                     @php $sum_lunas = $sum_tot-$sum_kekurangan @endphp
-                                    <tr @if ($sum_lunas == 0)
-                                    style="background-color: lightgreen"
-                                    @endif >
+                                    <tr @if ($sum_lunas==0) style="background-color: lightgreen" @endif>
                                         <td>{{$order->user->name}}</td>
                                         <td>{{$order->judul}}</td>
                                         <td><a href="{{route('orders.show',$order->id)}}" type="button"
@@ -91,9 +89,8 @@
                                     @php $sum_kekurangan += $op->pay @endphp
                                     @endforeach
                                     @php $sum_lunas = $sum_tot-$sum_kekurangan @endphp
-                                    <tr @if ($sum_lunas == 0)
-                                    style="background-color: lightgreen"
-                                    @endif >
+                                    <tr @if ($sum_lunas==0) style="background-color: lightgreen" @endif>
+                                        <td>{{$order->user->name}}</td>
                                         <td>{{$order->judul}}</td>
                                         <td><a href="{{route('orders.show',$order->id)}}" type="button"
                                                 class="btn btn-outline-info">Info</a>

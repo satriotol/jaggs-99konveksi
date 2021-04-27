@@ -22,6 +22,13 @@ class UsersTableSeeder extends Seeder
                 'role' => 'admin',
                 'password' => Hash::make('pandeanlamper69b'),
             ]);
+            User::create([
+                'name' => 'Angga Bayu',
+                'phone_number' => '089620755330',
+                'email' => 'angga@gmail.com',
+                'role' => 'user',
+                'password' => Hash::make('pandeanlamper69b'),
+            ]);
         }
     }
 }
