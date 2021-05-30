@@ -28,12 +28,21 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
+                            @if (session('success'))
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <strong>{{session('success')}}</strong>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            @endif
                             <table id="example1" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
                                         <th>Name</th>
                                         <th>E-mail</th>
                                         <th>Phone Number</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -42,16 +51,15 @@
                                         <td>{{$user->name}}</td>
                                         <td>{{$user->email}}</td>
                                         <td>{{$user->phone_number}}</td>
+                                        <td><a href="{{route('user.resetpassword',$user->id)}}" type="button"
+                                                class="btn btn-outline-info">Reset
+                                                Password</a>
+                                            <button class="btn btn-outline-danger" id="deleteCategoryForm"
+                                                onclick="confirm('Are You Sure?')">Delete</button>
+                                        </td>
                                     </tr>
                                     @endforeach
                                 </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>E-mail</th>
-                                        <th>Phone Number</th>
-                                    </tr>
-                                </tfoot>
                             </table>
                         </div>
                         <!-- /.card-body -->

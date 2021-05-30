@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateUserRequest;
+use App\Http\Requests\UpdateHardResetPasswordRequest;
 use App\Http\Requests\UpdateUserAdminRequest;
 use App\Http\Requests\UpdateUserEmailRequest;
 use App\Http\Requests\UpdateUserPasswordRequest;
@@ -21,7 +22,7 @@ class UserController extends Controller
     public function index()
     {
         $users = User::all();
-        return view('user.index')->with('users',$users);
+        return view('user.index')->with('users', $users);
     }
 
     /**
@@ -37,18 +38,18 @@ class UserController extends Controller
     public function createadmin()
     {
         $users = User::all();
-        return view('user.createadmin')->with('users',$users);
+        return view('user.createadmin')->with('users', $users);
     }
     public function editadmin(User $user)
     {
-        return view('user.editadmin')->with('user',$user);
+        return view('user.editadmin')->with('user', $user);
     }
-    public function updateadmin(UpdateUserAdminRequest $request,User $user)
+    public function updateadmin(UpdateUserAdminRequest $request, User $user)
     {
         $user->update([
             'role' => $request['role']
         ]);
-        session()->flash('success','User Role Update Successfully');
+        session()->flash('success', 'User Role Update Successfully');
         return redirect(route('user.admin'));
     }
 
@@ -67,7 +68,7 @@ class UserController extends Controller
             'phone_number' => $request['phone_number'],
             'password' => Hash::make($request['password']),
         ]);
-        session()->flash('success','Order Create Successfully');
+        session()->flash('success', 'Order Create Successfully');
         return redirect(route('user.index'));
     }
 
@@ -91,12 +92,17 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        return view('user.create')->with('user',$user);
+        return view('user.create')->with('user', $user);
     }
     public function editemail(User $user)
     {
-        return view('user.updateemail')->with('user',$user);
+        return view('user.updateemail')->with('user', $user);
     }
+    public function resetpassword(User $user)
+    {
+        return view('user.resetpassword', compact('user'));
+    }
+
 
     /**
      * Update the specified resource in storage.
@@ -113,29 +119,37 @@ class UserController extends Controller
             'phone_number' => $request['phone_number'],
             'password' => Hash::make($request['password']),
         ]);
-        session()->flash('success','User Update Successfully');
+        session()->flash('success', 'User Update Successfully');
 
         return redirect(route('user.index'));
     }
-    public function updateemail(UpdateUserEmailRequest $request,User $user)
+    public function updateemail(UpdateUserEmailRequest $request, User $user)
     {
         $user->update([
             'email' => $request['email']
         ]);
-        session()->flash('success','Tag Update Successfully');
-        return redirect(route('user.edit',$user->id));
+        session()->flash('success', 'Tag Update Successfully');
+        return redirect(route('user.edit', $user->id));
     }
     public function editpassword(User $user)
     {
-        return view('user.updatepassword')->with('user',$user);
+        return view('user.updatepassword')->with('user', $user);
     }
-    public function updatepassword(UpdateUserPasswordRequest $request,User $user)
+    public function updatepassword(UpdateUserPasswordRequest $request, User $user)
     {
         $user->update([
             'password' => Hash::make($request['new_password'])
         ]);
-        session()->flash('success','User Password Update Successfully');
-        return redirect(route('user.edit',$user->id));
+        session()->flash('success', 'User Password Update Successfully');
+        return redirect(route('user.edit', $user->id));
+    }
+    public function updateresetpassword(UpdateHardResetPasswordRequest $request, User $user)
+    {
+        $user->update([
+            'password' => Hash::make($request['new_password'])
+        ]);
+        session()->flash('success', 'User Password Update Successfully');
+        return redirect(route('user.index'));
     }
 
     /**
