@@ -164,7 +164,7 @@ class UserController extends Controller
         if (Auth::user()->id == $user->id) {
             session()->flash('failed', 'You Cannot Deleted Your Account');
             return redirect(route('user.index'));
-        } elseif ($user->order()) {
+        } elseif ($user->order()->count() > 0) {
             session()->flash('failed', 'You Cannot Deleted This Account, Because Have A Order, Please Delete Order First');
             return redirect(route('user.index'));
         } else {
