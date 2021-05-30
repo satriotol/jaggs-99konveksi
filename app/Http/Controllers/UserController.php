@@ -128,7 +128,7 @@ class UserController extends Controller
         $user->update([
             'email' => $request['email']
         ]);
-        session()->flash('success', 'Tag Update Successfully');
+        session()->flash('success', 'Email ' . $user->name . ' Update Successfully');
         return redirect(route('user.edit', $user->id));
     }
     public function editpassword(User $user)
