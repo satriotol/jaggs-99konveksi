@@ -36,6 +36,14 @@
                                 </button>
                             </div>
                             @endif
+                            @if (session('failed'))
+                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                <strong>{{session('failed')}}</strong>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            @endif
                             <table id="example1" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
@@ -54,8 +62,8 @@
                                         <td><a href="{{route('user.resetpassword',$user->id)}}" type="button"
                                                 class="btn btn-outline-info">Reset
                                                 Password</a>
-                                            <button class="btn btn-outline-danger" id="deleteCategoryForm"
-                                                onclick="confirm('Are You Sure?')">Delete</button>
+                                            <a href="{{route('user.destroy',$user->id)}}" class="btn btn-outline-danger"
+                                                onclick="return confirm('Are You Sure?')">Delete</a>
                                         </td>
                                     </tr>
                                     @endforeach

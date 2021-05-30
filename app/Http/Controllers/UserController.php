@@ -10,6 +10,7 @@ use App\Http\Requests\UpdateUserPasswordRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -158,8 +159,19 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        //
+        if (Auth::user()->id == $user->id) {
+            session()->flash('failed', 'You Cannot Deleted Your Account');
+            return redirect(route('user.index'));
+        } elseif ($user->order()) {
+            session()->flash('failed', 'You Cannot Deleted This Account, Because Have A Order, Please Delete Order First');
+            return redirect(route('user.index'));
+        } else {
+            $user->delete();
+            $user->order()->delete();
+        }
+        session()->flash('success', 'User Deleted Successfully');
+        return redirect(route('user.index'));
     }
 }

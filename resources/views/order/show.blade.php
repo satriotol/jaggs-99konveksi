@@ -179,17 +179,17 @@
                                 class="form-control">
                             <div class="form-group">
                                 <label for="inputName">Product</label>
-                                <input type="text" id="inputName" autocomplete="off" name="product_name"
+                                <input type="text" id="inputName" required autocomplete="off" name="product_name"
                                     class="form-control">
                             </div>
                             <div class="form-group">
                                 <label for="inputName">Quantity</label>
-                                <input type="number" id="inputqty" autocomplete="off" name="qty"
+                                <input type="number" id="inputqty" required autocomplete="off" name="qty"
                                     class="form-control calc">
                             </div>
                             <div class="form-group">
                                 <label for="inputName">Price</label>
-                                <input type="text" id="inputprice" autocomplete="off" name="price"
+                                <input type="text" id="inputprice" required autocomplete="off" name="price"
                                     class="form-control calc">
                             </div>
                             <div class="form-group">
@@ -220,7 +220,7 @@
                     <input type="hidden" name="type" value="income">
                     <div class="form-group">
                         <label for="inputName">Pay</label>
-                        <input type="text" id="inputName" autocomplete="off" name="pay" class="form-control">
+                        <input type="text" id="inputName" required autocomplete="off" name="pay" class="form-control">
                     </div>
                     <div class="form-group">
                         <label>Date</label>
@@ -236,7 +236,7 @@
                     </div>
                     <div class="form-group">
                         <label>Description</label>
-                        <select name="description" class="form-control">
+                        <select name="description" class="form-control" required>
                             <option value="">Choose One</option>
                             <option value="dp">DP</option>
                             <option value="pelunasan">Pelunasan</option>

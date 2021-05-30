@@ -35,6 +35,7 @@ Route::group(['middleware' => ['auth']], function () {
 });
 Route::group(['middleware' => ['admin']], function () {
     Route::get('/user', 'UserController@index')->name('user.index');
+    Route::get('/user/destroy/{user}', 'UserController@destroy')->name('user.destroy');
     Route::get('/create', 'UserController@create')->name('user.create');
     Route::get('/role', 'UserController@createadmin')->name('user.admin');
     Route::get('/role/{user}', 'UserController@editadmin')->name('user.editadmin');

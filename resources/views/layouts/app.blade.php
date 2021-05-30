@@ -88,7 +88,6 @@
         .wrapper {
             zoom: 90%;
         }
-
     </style>
 </head>
 
@@ -160,7 +159,8 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="{{route('orders.index')}}" class="nav-link {{ Request::routeIs('orders.index') ? 'active' : '' }}">
+                                    <a href="{{route('orders.index')}}"
+                                        class="nav-link {{ Request::routeIs('orders.index') ? 'active' : '' }}">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>All Invoice</p>
                                     </a>
@@ -206,72 +206,72 @@
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
-                                <li class="nav-item">
+                                {{-- <li class="nav-item">
                                     <a href="" class="nav-link {{ Request::routeIs('user.index') ? 'active' : '' }}">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Overview</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{route('payment.income')}}"
-                                        class="nav-link {{ Request::routeIs('payment.income') ? 'active' : '' }}">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Income</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{route('payment.outcome')}}"
-                                        class="nav-link {{ Request::routeIs('payment.outcome') ? 'active' : '' }}">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Outcome</p>
-                                    </a>
-                                </li>
-                            </ul>
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Overview</p>
+                                </a> --}}
                         </li>
-                        @endif
-                        <li
-                            class="nav-item has-treeview {{ (request()->segment(1)== 'user') ? 'menu-open' : '' }} {{ Request::routeIs('user.admin','user.create') ? 'menu-open' : '' }}">
-                            <a href="#"
-                                class="nav-link {{ (request()->segment(1)== 'user') ? 'active' : '' }} {{ Request::routeIs('user.admin','user.create') ? 'active' : '' }}">
-                                <i class="nav-icon fas fa-user-cog"></i>
-                                <p>
-                                    User Setting
-                                    <i class="fas fa-angle-left right"></i>
-                                </p>
+                        <li class="nav-item">
+                            <a href="{{route('payment.income')}}"
+                                class="nav-link {{ Request::routeIs('payment.income') ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Income</p>
                             </a>
-                            <ul class="nav nav-treeview">
-                                @if (auth()->user()->isAdmin())
-                                <li class="nav-item">
-                                    <a href="{{route('user.index')}}"
-                                        class="nav-link {{ Request::routeIs('user.index') ? 'active' : '' }}">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>User List</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{route('user.create')}}"
-                                        class="nav-link {{ Request::routeIs('user.create') ? 'active' : '' }}">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Add User</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{route('user.admin')}}"
-                                        class="nav-link {{ Request::routeIs('user.admin') ? 'active' : '' }}">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>User Role</p>
-                                    </a>
-                                </li>
-                                @endif
-                                <li class="nav-item">
-                                    <a href="{{route('user.edit',Auth::user()->id)}}"
-                                        class="nav-link {{ Request::routeIs('user.edit','user.editemail') ? 'active' : '' }}">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Edit User</p>
-                                    </a>
-                                </li>
-                            </ul>
                         </li>
+                        <li class="nav-item">
+                            <a href="{{route('payment.outcome')}}"
+                                class="nav-link {{ Request::routeIs('payment.outcome') ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Outcome</p>
+                            </a>
+                        </li>
+                    </ul>
+                    </li>
+                    @endif
+                    <li
+                        class="nav-item has-treeview {{ (request()->segment(1)== 'user') ? 'menu-open' : '' }} {{ Request::routeIs('user.admin','user.create') ? 'menu-open' : '' }}">
+                        <a href="#"
+                            class="nav-link {{ (request()->segment(1)== 'user') ? 'active' : '' }} {{ Request::routeIs('user.admin','user.create') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-user-cog"></i>
+                            <p>
+                                User Setting
+                                <i class="fas fa-angle-left right"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            @if (auth()->user()->isAdmin())
+                            <li class="nav-item">
+                                <a href="{{route('user.index')}}"
+                                    class="nav-link {{ Request::routeIs('user.index') ? 'active' : '' }}">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>User List</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{route('user.create')}}"
+                                    class="nav-link {{ Request::routeIs('user.create') ? 'active' : '' }}">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Add User</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{route('user.admin')}}"
+                                    class="nav-link {{ Request::routeIs('user.admin') ? 'active' : '' }}">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>User Role</p>
+                                </a>
+                            </li>
+                            @endif
+                            <li class="nav-item">
+                                <a href="{{route('user.edit',Auth::user()->id)}}"
+                                    class="nav-link {{ Request::routeIs('user.edit','user.editemail') ? 'active' : '' }}">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Edit User</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
                     </ul>
                 </nav>
                 <nav class="mt-2 user-panel">
