@@ -29,14 +29,38 @@
                             <!-- /.card-header -->
                             <div class="card-body">
                                 <form action="">
-                                    <div class="form-group">
-                                        <label>Cari</label>
-                                        <input type="text" class="form-control" name="search"
-                                            value="{{ @old('search') }}" id="">
-                                        <div class="text-right">
-                                            <input type="submit" value="Cari" class="btn btn-primary" name=""
-                                                id="">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Judul</label>
+                                                <input type="text" class="form-control" name="judul"
+                                                    value="{{ @old('judul') }}" id="">
+                                            </div>
                                         </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Nama</label>
+                                                <input type="text" class="form-control" name="cust_name"
+                                                    value="{{ @old('cust_name') }}" id="">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Marketing</label>
+                                                <select name="user_id" id="" class="form-control">
+                                                    <option value="">Pilih Marketing</option>
+                                                    @foreach ($users as $user)
+                                                        <option value="{{ $user->id }}"
+                                                            @if (@old('user_id') == $user->id) selected @endif>
+                                                            {{ $user->name }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="text-right">
+                                        <input type="submit" value="Cari" class="btn btn-primary" name=""
+                                            id="">
                                     </div>
                                 </form>
                                 <table class="table table-bordered table-striped">
@@ -81,7 +105,7 @@
                                     </tbody>
                                 </table>
                                 <div class="float-right">
-                                    {{ $orders->links() }}
+                                    {!! $orders->appends(['judul' => @old('judul'), 'user_id' => @old('user_id'), 'cust_name' => @old('cust_name')])->render() !!}
                                 </div>
                             </div>
                             <!-- /.card-body -->
@@ -96,39 +120,4 @@
         </section>
         <!-- /.content -->
     </div>
-    <!-- Modal -->
-    @if ($orders->count() > 0)
-        <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <form action="{{ route('orders.destroy', $order->id) }}" method="POST">
-                    @csrf
-                    @method('DELETE')
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Delete Category</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <p class="text-center text-bold">Are you sure want to delete this category?</p>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">No, Go Back</button>
-                            <button type="submit" class="btn btn-danger">Yes, Delete</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    @endif
-@endsection
-@section('script')
-    <script>
-        function handleDelete(id) {
-            var form = document.getElementById('deleteCategoryForm');
-            form.action = '/orders/' + id;
-            $('#deleteModal').modal('show');
-        }
-    </script>
 @endsection

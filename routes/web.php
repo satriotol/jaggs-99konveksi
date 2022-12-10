@@ -21,8 +21,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('orderdetail', 'OrderDetailController');
     Route::resource('payments', 'PaymentController');
     Route::resource('user', 'UserController')->except([
-        'index', 'create'
+        'index', 'create', 'edit'
     ]);
+
+    Route::get('/user/edit/akunku', 'UserController@edit')->name('user.edit');
     Route::get('/user/{user}/editemail', 'UserController@editemail')->name('user.editemail');
     Route::put('/user/{user}/editemail', 'UserController@updateemail')->name('user.updateemail');
 

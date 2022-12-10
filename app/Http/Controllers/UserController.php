@@ -91,9 +91,10 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit()
     {
-        return view('user.create')->with('user', $user);
+        $user = Auth::user();
+        return view('user.create', compact('user'));
     }
     public function editemail(User $user)
     {

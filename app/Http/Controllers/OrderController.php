@@ -7,6 +7,7 @@ use App\Mail\InvoiceMail;
 use App\Order;
 use App\OrderDetail;
 use App\Payment;
+use App\User;
 use PDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -22,8 +23,9 @@ class OrderController extends Controller
     public function index(Request $request)
     {
         $orders = Order::getOrders($request);
+        $users = User::getUsers();
         $request->flash();
-        return view('order.index', compact('orders'));
+        return view('order.index', compact('orders', 'users'));
     }
     public function indexinvoice()
     {

@@ -24,16 +24,27 @@ class Order extends Model
     }
     public static function getOrders($request)
     {
-        $columnsToSearch = ['judul', 'cust_name', 'cust_phone', 'cust_email', 'start_date', 'end_date', 'user_id', 'subtotal'];
-        $searchQuery = '%' . $request->search . '%';
+        $user_id = $request->user_id;
+        $judul = '%' . $request->judul . '%';
+        $cust_name = '%' . $request->cust_name . '%';
+
         $order = Order::orderBy('id', 'desc');
-        foreach ($columnsToSearch as $column) {
-            $order = $order->orWhere($column, 'LIKE', $searchQuery);
+        if ($user_id) {
+            $order->where('user_id', $user_id);
         }
+        if ($request->judul) {
+            $order->where('judul', 'LIKE', $judul);
+        }
+        if ($request->cust_name) {
+            $order->where('cust_name', 'LIKE', $cust_name);
+        }
+
         if (Auth::user()->role != 'admin') {
-            return $order->where('user_id', Auth::user()->id);
+            return $order->where('user_id', Auth::user()->id)->paginate(10);
+        } else {
+
+            return $order->paginate(10);
         }
-        return $order->paginate(10);
     }
     public function getQty()
     {
