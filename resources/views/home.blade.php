@@ -40,7 +40,7 @@
                             <!-- small box -->
                             <div class="small-box bg-warning">
                                 <div class="inner">
-                                    <h3>{{ $users }}</h3>
+                                    <h3>{{ $users->count() }}</h3>
                                     <p>User</p>
                                 </div>
                                 <div class="icon">

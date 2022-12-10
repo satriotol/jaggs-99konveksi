@@ -6,6 +6,7 @@ use App\Order;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -27,7 +28,7 @@ class HomeController extends Controller
     public function index(Request $request)
     {
         $orders = Order::getOrders($request);
-        $users = User::all()->count();
+        $users = User::where('role', '!=', 'admin')->get();
         return view('home')->with('orders', $orders)->with('users', $users);
     }
     public function profile()
