@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email','phone_number', 'password','role'
+        'name', 'email', 'phone_number', 'password', 'role'
     ];
 
     /**
@@ -36,7 +36,8 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-    public function order(){
+    public function order()
+    {
         return $this->hasMany(Order::class);
     }
     public function isAdmin()

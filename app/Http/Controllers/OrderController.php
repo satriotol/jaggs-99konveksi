@@ -19,9 +19,11 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('order.index')->with('orders', Order::all());
+        $orders = Order::getOrders($request);
+        $request->flash();
+        return view('order.index', compact('orders'));
     }
     public function indexinvoice()
     {
@@ -49,14 +51,14 @@ class OrderController extends Controller
         $order = Order::create([
             'user_id' => auth()->user()->id,
             'judul' => $request->judul,
-            'cust_name'=> $request->cust_name,
-            'cust_email'=> $request->cust_email,
-            'cust_phone'=> $request->cust_phone,
-            'start_date'=> $request->start_date,
-            'end_date'=> $request->end_date,
+            'cust_name' => $request->cust_name,
+            'cust_email' => $request->cust_email,
+            'cust_phone' => $request->cust_phone,
+            'start_date' => $request->start_date,
+            'end_date' => $request->end_date,
         ]);
-        session()->flash('success','Order Create Successfully');
-        return redirect(route('orders.show',$order->id));
+        session()->flash('success', 'Order Create Successfully');
+        return redirect(route('orders.show', $order->id));
     }
     /**
      * Display the specified resource.
@@ -66,13 +68,13 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
-        return view('order.show')->with('order',$order)->with('orderdetails', OrderDetail::all())->with('payments', Payment::all());
+        return view('order.show')->with('order', $order)->with('orderdetails', OrderDetail::all())->with('payments', Payment::all());
     }
     public function printpdf($id)
     {
         $order = Order::with('orderdetail')->find($id);
-        $pdf = PDF::loadview('pdf_test',compact('order'));
-        return $pdf->download("INV-".$order->id.".pdf");
+        $pdf = PDF::loadview('pdf_test', compact('order'));
+        return $pdf->download("INV-" . $order->id . ".pdf");
     }
 
     /**
@@ -109,15 +111,15 @@ class OrderController extends Controller
         $order->delete();
         $order->orderdetail()->delete();
         $order->payment()->delete();
-        session()->flash('success','Order Deleted Successfully');
+        session()->flash('success', 'Order Deleted Successfully');
         return redirect(route('orders.index'));
     }
     public function sendemail($id)
     {
         $order = Order::with('orderdetail')->find($id);
-        $pdf = PDF::loadview('pdf_test',compact('order'))->setPaper('a4');
-        Mail::to($order->cust_email)->send(new InvoiceMail($order,$pdf));
-        session()->flash('success','Send Email Successfully');
+        $pdf = PDF::loadview('pdf_test', compact('order'))->setPaper('a4');
+        Mail::to($order->cust_email)->send(new InvoiceMail($order, $pdf));
+        session()->flash('success', 'Send Email Successfully');
         return redirect()->back();
     }
 }

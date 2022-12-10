@@ -7,9 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class Payment extends Model
 {
     protected $fillable = [
-        'order_id','pay','date','type','description','ket'
+        'order_id', 'pay', 'date', 'type', 'description', 'ket'
     ];
-    public function order(){
+    public function order()
+    {
         return $this->belongsTo(Order::class);
     }
 }
