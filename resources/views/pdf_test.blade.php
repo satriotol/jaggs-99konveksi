@@ -113,7 +113,7 @@
 
 <body>
     <div class="left-asset">
-        <img class="img-logo" src="https://ninetyninekonveksi.jagsstore.com/99logo-min.jpg" alt="">
+        <img class="img-logo" src="https://ninetyninekonveksi.krotidesian.xyz/99logo-min.jpg" alt="">
         <p class="title color-dg">
             Faktur INV/{{ $order->id }}
         </p>
