@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>Hello, world!</title>
+    <title>NINETYNINE INVOICE</title>
     <style>
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
@@ -75,11 +75,11 @@
 
         p.title-order {
             position: absolute;
-            width: 169px;
-            left: 500px;
+            width: 100%;
+            left: 400px;
             top: 144px;
             font-weight: bold;
-            font-size: 15px;
+            font-size: 12px;
             line-height: 14px;
         }
 
@@ -107,13 +107,12 @@
         .none-border {
             border: 0px;
         }
-
     </style>
 </head>
 
 <body>
     <div class="left-asset">
-        <img class="img-logo" src="https://ni.jaggstudio.com/99logo-min.jpg" alt="">
+        <img class="img-logo" src="https://ni.jaggsstudio.com/99logo-min.jpg" alt="">
         <p class="title color-dg">
             Faktur INV/{{ $order->id }}
         </p>
@@ -124,56 +123,54 @@
                 <th>Quantitas</th>
                 <th>Subtotal</th>
             </tr>
-            <?php $sum_tot = 0?>
             @foreach ($order->orderdetail as $od)
-            <tr>
-                <td>{{ $od->product_name }}</td>
-                <td>Rp {{ number_format($od->price,2) }}</td>
-                <td>{{ $od->qty }}</td>
-                <td>Rp {{ number_format($od->price*$od->qty,2) }}</td>
-            </tr>
-            <?php $sum_tot += $od->price*$od->qty ?>
+                <tr>
+                    <td>{{ $od->product_name }}</td>
+                    <td>Rp {{ number_format($od->price, 2) }}</td>
+                    <td>{{ $od->qty }}</td>
+                    <td>Rp {{ number_format($od->price * $od->qty, 2) }}</td>
+                </tr>
             @endforeach
             <tr>
                 <th class="none-border" colspan="2"></th>
                 <th style="text-align: left;" colspan="1">Subtotal</th>
-                <td>Rp {{ number_format($sum_tot,2) }}</td>
+                <td>Rp {{ number_format($order->getTotalPrice(), 2) }}</td>
             </tr>
-            <?php $sum_kekurangan = 0?>
             @foreach ($order->payment as $pay)
-            <tr>
-                <th class="none-border" colspan="2"></th>
-                <th colspan="1" style="color: black;text-align: left;">Dibayar pada <br><small><i>{{$pay->date}}</i></small></th>
-                <td>Rp {{ number_format($pay->pay,2) }}</td>
-            </tr>
-            <?php $sum_kekurangan += $pay->pay?>
+                <tr>
+                    <th class="none-border" colspan="2"></th>
+                    <th colspan="1" style="color: black;text-align: left;">Dibayar pada
+                        <br><small><i>{{ $pay->date }}</i></small>
+                    </th>
+                    <td>Rp {{ number_format($pay->pay, 2) }}</td>
+                </tr>
             @endforeach
             <tr>
                 <td class="none-border" colspan="2"></td>
                 <th style="text-align: left;" colspan="1">Belum dibayarkan</th>
-                @if ($sum_tot-$sum_kekurangan == "0")
-                <td style="color: #28a745">
-                    <h3><b>LUNAS</b></h3>
-                </td>
+                @if ($order->getStatusPayment() == '0')
+                    <td style="color: #28a745">
+                        <h3><b>LUNAS</b></h3>
+                    </td>
                 @else
-                <td>Rp {{ number_format($sum_tot-$sum_kekurangan,2) }}</td>
+                    <td>Rp {{ number_format($order->getStatusPayment(), 2) }}</td>
                 @endif
             </tr>
         </table>
     </div>
     <p class="contact-info"><b>NINENTYNINE KONVEKSI</b><br>
-        {{$order->user->name}} <br>
-        Telp. {{$order->user->phone_number}} <br>
+        {{ $order->user->name }} <br>
+        Telp. {{ $order->user->phone_number }} <br>
         Email ninetyninekonveksi@gmail.com
     </p>
-    <p class="title-order">{{$order->judul}}/{{$order->cust_name}}</p>
+    <p class="title-order">{{ $order->judul }}/{{ $order->cust_name }}</p>
     <div class="date-in">
         <p>Tanggal Faktur</p>
-        <p style="color: black;">{{$order->start_date}}</p>
+        <p style="color: black;">{{ $order->start_date }}</p>
     </div>
     <div class="date-out">
         <p>Jatuh Tempo</p>
-        <p style="color: black;">{{$order->end_date}}</p>
+        <p style="color: black;">{{ $order->end_date }}</p>
     </div>
 </body>
 

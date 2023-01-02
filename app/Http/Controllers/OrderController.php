@@ -76,7 +76,7 @@ class OrderController extends Controller
     {
         $order = Order::with('orderdetail')->find($id);
         $pdf = PDF::loadview('pdf_test', compact('order'));
-        return $pdf->download("INV-" . $order->id . ".pdf");
+        return $pdf->stream("INV-" . $order->id . ".pdf");
     }
 
     /**
